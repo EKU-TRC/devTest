@@ -33,7 +33,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {appRoutes} from './routes';
 import { RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import {GetBudgetCodeService} from './shared/budgetCodeGetService';
@@ -41,7 +40,12 @@ import { BudgetCodeTableComponentComponent } from './budget-code-table-component
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BudgetCodeFormComponent } from './budget-code-form/budget-code-form.component';
 @NgModule({
-  declarations: [AppComponent, BudgetCodeComponent, NavBarComponent, ErrorPageComponent, BudgetCodeTableComponentComponent, BudgetCodeFormComponent],
+  declarations: [AppComponent,
+    BudgetCodeComponent,
+    NavBarComponent,
+    ErrorPageComponent,
+    BudgetCodeTableComponentComponent,
+    BudgetCodeFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,7 +76,6 @@ import { BudgetCodeFormComponent } from './budget-code-form/budget-code-form.com
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    RouterModule.forRoot(appRoutes),
     MatPaginatorModule,
     ReactiveFormsModule
   ],

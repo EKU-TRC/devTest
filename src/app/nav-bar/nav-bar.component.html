@@ -4,11 +4,11 @@
       [mode]="(isHandset$ | async) ? 'push' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar ><p class="mat-small">
-      Budget Data Tool
+      BUDGET DATA TOOL
     </p></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/" routerLinkActive="active">View all budgets</a>
-      <a mat-list-item href="/create">Submit new budget</a>
+      <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">View all budgets</a>
+      <a mat-list-item routerLink="/create" routerLinkActive="active" >Submit new budget</a>
       
     </mat-nav-list>
   </mat-sidenav>

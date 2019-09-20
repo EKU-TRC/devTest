@@ -1,10 +1,10 @@
-<div class="mat-elevation-z8 budget-code-table">
+<div class=" budget-code-table mat-elevation-z16">
 
     <form mat-list-item class="search-form">
 
       
-
-        <mat-form-field class="form-full-width" appearance="outline">
+      <h3 class="mat-display-1">Budget Data</h3>
+        <mat-form-field class="form-full-width " appearance="outline">
             <div class="display-flex">
               <mat-icon aria-hidden="false" aria-label="search icon" >search</mat-icon>
               <input matInput placeholder="Type your query...">
@@ -47,7 +47,7 @@
   <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"
-      [pageSize]="50"
+      [pageSize]="25"
       [pageSizeOptions]="[25, 50, 100, 250]">
   </mat-paginator>
 </div>

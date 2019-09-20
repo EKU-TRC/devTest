@@ -21,4 +21,6 @@
 
 .budget-code-table{
   min-height: 100vh;
+  padding:20px;
+  margin:10px;
 }

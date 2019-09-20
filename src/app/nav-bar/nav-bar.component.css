@@ -4,6 +4,7 @@
 
 .sidenav {
   width: 200px;
+  padding-top: 60px;
 }
 
 .sidenav .mat-toolbar {
@@ -18,4 +19,11 @@
 
 .content{
   min-height: 100vh;
+}
+
+.active {
+color: rgb(104, 104, 104);
+text-decoration: underline;
+
+
 }

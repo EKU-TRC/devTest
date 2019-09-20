@@ -5,5 +5,16 @@ mat-card{
    
 } 
 .container {
-    min-height: 100vh;
+
+        min-height: 100vh;
+        padding:20px;
+        margin:10px;
+   
 } 
+
+.label{
+    color:rgb(143, 143, 143);
+}
+.budgetTitle{
+    margin-bottom: 4px;
+}
