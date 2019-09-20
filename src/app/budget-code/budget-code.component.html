@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-card *ngIf="budgetCode"  class="" >
+    <p class="mat-small">Budget Title:</p>
+    <h3 class="mat-display-1">{{ budgetCode.budgetTitle }}</h3>
+    <p class="mat-small">
+      Fiscal Year:
+    </p>
+    <p class="fiscalYear">{{ budgetCode.biscalYear }}</p>
+    <p class="mat-small">
+      Budget Code:
+    </p>
+    <p class="budgetCode">{{ budgetCode.budgetCode }}</p>
+    <p class="mat-small">
+      Budget Code ID:
+    </p>
+    <p class="mat-body">{{ budgetCode.budgetCodeId }}</p>
+  </mat-card>
+</div>
