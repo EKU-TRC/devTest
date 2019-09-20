@@ -10,10 +10,5 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
 export class AppComponent {
   title = 'Budget Codes';
 
-  budgetCode1: IBudgetCode =  {
-        BudgetCodeId: 12,
-        FiscalYear: 2019,
-        BudgetCode: '8-0001',
-        BudgetTitle: 'FY 2019 Budget'
-    }
+
 }

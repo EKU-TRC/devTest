@@ -14,3 +14,11 @@
 .form-full-width {
   width: 100%;
 }
+
+.display-flex {
+  display: flex;
+}
+
+.budget-code-table{
+  min-height: 100vh;
+}

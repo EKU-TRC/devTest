@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IBudgetCode } from '../budget-code/budget-code.model';
 
-@Injectable()
-export class GetBudgetCodeService {
-  static getBudgetCodes(): IBudgetCode[] {
-    return budgetCodes;
-  }
-constructor() {/*http*/}
-}
-
 const budgetCodes: IBudgetCode[] = [
   {
     budgetCodeId: 1,
@@ -239,3 +231,19 @@ const budgetCodes: IBudgetCode[] = [
     budgetTitle: 'Research & Services'
   }
 ];
+
+@Injectable()
+export class GetBudgetCodeService {
+  static getBudgetCodes(): IBudgetCode[] {
+    return budgetCodes;
+  }
+
+  static getBudgetCode(budgetId: number): IBudgetCode {
+    return budgetCodes.filter(bc => {
+      return bc.budgetCodeId === budgetId;
+    })[0];
+  }
+constructor() {/*http*/}
+}
+
+

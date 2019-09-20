@@ -2,16 +2,26 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-error-page',
   template: `
-    <h3 class="mat-display-2">Sorry</h3>
-    <p>There is no content at this address.  <a routerLink="/"> Please navigate to the main page </a> </p>  
+    <div class="error-page">
+      <h3 class="mat-display-2">Sorry</h3>
+      <p class="mat-small">
+        There is no content at this address.
+        <a routerLink="/"> Please navigate to the main page </a>
+      </p>
+    </div>
   `,
-  styles: []
+  styles: [
+    `
+      .error-page {
+        text-align: center;
+        min-height: 100vh;
+        padding-top: 3em;
+      }
+    `
+  ]
 })
 export class ErrorPageComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

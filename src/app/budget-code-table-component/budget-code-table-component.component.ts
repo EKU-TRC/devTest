@@ -17,7 +17,7 @@ export class BudgetCodeTableComponentComponent implements AfterViewInit, OnInit 
   dataSource: BudgetCodeTableComponentDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['budgetCodeId', 'fiscalYear', 'budgetCode', 'budgetTitle'];
+  displayedColumns = ['budgetTitle', 'budgetCode', 'fiscalYear', 'budgetCodeId'  ];
 
 
   ngOnInit() {

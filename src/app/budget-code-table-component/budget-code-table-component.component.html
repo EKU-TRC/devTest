@@ -1,10 +1,14 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 budget-code-table">
 
     <form mat-list-item class="search-form">
-        <mat-form-field class="form-full-width">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" style="display: inline">search</mat-icon><input matInput placeholder="Search" value="Type in">
-          
+
       
+
+        <mat-form-field class="form-full-width" appearance="outline">
+            <div class="display-flex">
+              <mat-icon aria-hidden="false" aria-label="search icon" >search</mat-icon>
+              <input matInput placeholder="Type your query...">
+            </div>
         </mat-form-field>
         </form>
  
@@ -14,8 +18,8 @@
     <!-- Budget Code Id Column -->
     <ng-container matColumnDef="budgetTitle">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Budget Title</th>
-        <td mat-cell *matCellDef="let row">{{row.budgetTitle}}</td>
-      </ng-container>
+        <td mat-cell *matCellDef="let row"><a [routerLink]="['/budget', row.budgetCodeId]">{{row.budgetTitle}}</a></td>
+        </ng-container>
   
       <!--budgetCode -->
       <ng-container matColumnDef="budgetCode">
@@ -26,13 +30,13 @@
 
     <!-- Budget Code Id Column -->
     <ng-container matColumnDef="budgetCodeId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Budget Code</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Budget Code ID</th>
       <td mat-cell *matCellDef="let row">{{row.budgetCodeId}}</td>
     </ng-container>
 
     <!--Fiscal Year Column -->
     <ng-container matColumnDef="fiscalYear">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>fiscalYear</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fiscal Year</th>
       <td mat-cell *matCellDef="let row">{{row.fiscalYear}}</td>
     </ng-container>
 

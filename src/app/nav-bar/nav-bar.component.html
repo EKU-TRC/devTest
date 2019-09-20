@@ -3,10 +3,12 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'push' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Budget Code Tool</mat-toolbar>
+    <mat-toolbar ><p class="mat-small">
+      Budget Data Tool
+    </p></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/table" routerLinkActive="active">View all budget codes</a>
-      <a mat-list-item href="#">Submit new budget code</a>
+      <a mat-list-item routerLink="/" routerLinkActive="active">View all budgets</a>
+      <a mat-list-item href="/create">Submit new budget</a>
       
     </mat-nav-list>
   </mat-sidenav>
@@ -20,8 +22,8 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
       </button>
-      <span>Budget Code Tool</span>
+      <span>Budget Data Tool</span>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <router-outlet class="content"></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

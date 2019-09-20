@@ -26,7 +26,7 @@ import {
   MatCardModule,
   MatMenuModule,
 } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetCodeComponent } from './budget-code/budget-code.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -39,8 +39,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import {GetBudgetCodeService} from './shared/budgetCodeGetService';
 import { BudgetCodeTableComponentComponent } from './budget-code-table-component/budget-code-table-component.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { BudgetCodeFormComponent } from './budget-code-form/budget-code-form.component';
 @NgModule({
-  declarations: [AppComponent, BudgetCodeComponent, NavBarComponent, ErrorPageComponent, BudgetCodeTableComponentComponent],
+  declarations: [AppComponent, BudgetCodeComponent, NavBarComponent, ErrorPageComponent, BudgetCodeTableComponentComponent, BudgetCodeFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -72,7 +73,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatListModule,
     RouterModule.forRoot(appRoutes),
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveFormsModule
   ],
   providers: [GetBudgetCodeService],
   bootstrap: [AppComponent],

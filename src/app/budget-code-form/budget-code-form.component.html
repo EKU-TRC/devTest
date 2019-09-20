@@ -1,0 +1,88 @@
+<div class="budget-code-form">
+  <form [formGroup]="budgetCode" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>Submit New Budget</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="outline">
+              <input
+                matInput
+                placeholder="Budget Title"
+                matInput
+                formControlName="budgetTitle"
+              />
+              <mat-hint>Budget Title</mat-hint>
+              <mat-error
+                *ngIf="budgetCode.controls['budgetTitle'].hasError('required')"
+              >
+                Budget Title is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+  
+  
+        
+  
+        <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width" appearance="outline">
+                <input
+                  matInput
+                  placeholder="Budget Code"
+                  matInput
+                  placeholder="Budget Code"
+                  formControlName="budgetCode"
+                />
+                <mat-hint>Budget Code</mat-hint>
+                <mat-error
+                  *ngIf="budgetCode.controls['budgetCode'].hasError('required')"
+                >
+                  Budget Code is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+  
+          <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width" appearance="outline">
+                  <input
+                    matInput
+                    placeholder="Fiscal Year"
+                    matInput
+                    placeholder="Fiscal Year"
+                    formControlName="fiscalYear"
+                  />
+                  <mat-hint>
+                    Fiscal Year
+                  </mat-hint>
+                  <mat-error
+                    *ngIf="budgetCode.controls['fiscalYear'].hasError('required')"
+                  >
+                    Fiscal Year is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+  
+        <!-- <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Address" formControlName="address"></textarea>
+              <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+                Address is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div> -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
