@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IBudgetCode } from '../budget-code/budget-code.model';
+import { Observable, of } from 'rxjs';
 
 const budgetCodes: IBudgetCode[] = [
   {
@@ -234,16 +235,15 @@ const budgetCodes: IBudgetCode[] = [
 
 @Injectable()
 export class GetBudgetCodeService {
-  static getBudgetCodes(): IBudgetCode[] {
-    return budgetCodes;
+  constructor() {
+    /*http*/
   }
 
-  static getBudgetCode(budgetId: number): IBudgetCode {
-    return budgetCodes.filter(bc => {
-      return bc.budgetCodeId === budgetId;
-    })[0];
+ getBudgetCodes(): Observable<IBudgetCode[]> {
+    return of(budgetCodes);
   }
-constructor() {/*http*/}
+
+   getBudgetCode(budgetId: number): Observable<IBudgetCode> {
+    return of(budgetCodes[budgetId]);
+  }
 }
-
-

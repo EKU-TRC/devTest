@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBudgetCode } from './budget-code.model';
-import { GetBudgetCodeService } from '../shared/budgetCodeGetService';
+import { GetBudgetCodeService } from '../shared/budgetCodeGet.service';
 import { ActivatedRoute } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -14,23 +15,16 @@ export class BudgetCodeComponent implements OnInit {
   protected budgetCodeIndex: number;
   budgetCode: IBudgetCode;
 
-  constructor(private route: ActivatedRoute) { }
-
-
-
-  // @Input() budgetCode: IBudgetCode;
-
-
-//  EXAMPLE_DATA: IBudgetCode = GetBudgetCodeService.getBudgetCode();
-
-  // budgetCode = this.EXAMPLE_DATA;
+  constructor(private route: ActivatedRoute, private budgetService: GetBudgetCodeService) { }
+  getBudget(): void {
+    this.budgetService.getBudgetCodes().subscribe(
+      budgetCode => this.budgetCode = budgetCode[0]);
+  }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.budgetCodeIndex = +params.id;
-
-      this.budgetCode = GetBudgetCodeService.getBudgetCode(this.budgetCodeIndex);
-
+      this.getBudget();
     });
   }
 

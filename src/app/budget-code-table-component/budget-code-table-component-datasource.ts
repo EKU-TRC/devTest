@@ -3,49 +3,29 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import {IBudgetCode} from './../budget-code/budget-code.model';
-import { GetBudgetCodeService } from '../shared/budgetCodeGetService';
+import { IBudgetCode } from './../budget-code/budget-code.model';
+import { GetBudgetCodeService } from '../shared/budgetCodeGet.service';
 
 // TODO: Replace this with your own data model type
-
-
-const EXAMPLE_DATA: IBudgetCode[] = GetBudgetCodeService.getBudgetCodes();
-// TODO: replace this with real data from your application
-// const EXAMPLE_DATA: = [
-//   {id: 1, name: 'Hydrogen'},
-//   {id: 2, name: 'Helium'},
-//   {id: 3, name: 'Lithium'},
-//   {id: 4, name: 'Beryllium'},
-//   {id: 5, name: 'Boron'},
-//   {id: 6, name: 'Carbon'},
-//   {id: 7, name: 'Nitrogen'},
-//   {id: 8, name: 'Oxygen'},
-//   {id: 9, name: 'Fluorine'},
-//   {id: 10, name: 'Neon'},
-//   {id: 11, name: 'Sodium'},
-//   {id: 12, name: 'Magnesium'},
-//   {id: 13, name: 'Aluminum'},
-//   {id: 14, name: 'Silicon'},
-//   {id: 15, name: 'Phosphorus'},
-//   {id: 16, name: 'Sulfur'},
-//   {id: 17, name: 'Chlorine'},
-//   {id: 18, name: 'Argon'},
-//   {id: 19, name: 'Potassium'},
-//   {id: 20, name: 'Calcium'},
-// ];
-
 /**
  * Data source for the BudgetCodeTableComponent view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class BudgetCodeTableComponentDataSource extends DataSource<IBudgetCode> {
-  data: IBudgetCode[] = EXAMPLE_DATA;
+export class BudgetCodeTableComponentDataSource extends DataSource<
+  IBudgetCode
+> {
+  constructor(private budgetService: GetBudgetCodeService) {
+    super();
+    this.getBudgetCodes();
+  }
+  data: IBudgetCode[];
   paginator: MatPaginator;
   sort: MatSort;
-
-  constructor() {
-    super();
+  getBudgetCodes(): void {
+    this.budgetService
+      .getBudgetCodes()
+      .subscribe(budgetCodes => (this.data = budgetCodes));
   }
 
   /**
@@ -62,9 +42,11 @@ export class BudgetCodeTableComponentDataSource extends DataSource<IBudgetCode> 
       this.sort.sortChange
     ];
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return merge(...dataMutations).pipe(
+      map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      })
+    );
   }
 
   /**
@@ -94,11 +76,16 @@ export class BudgetCodeTableComponentDataSource extends DataSource<IBudgetCode> 
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'budgetTitle': return compare(a.budgetTitle, b.budgetTitle, isAsc);
-        case 'budgetCodeId': return compare(+a.budgetCodeId, +b.budgetCodeId, isAsc);
-        case 'budgetCode' : return compare(a.budgetCode, b.budgetCode, isAsc);
-        case 'fiscalYear': return compare(+a.fiscalYear, +b.fiscalYear, isAsc);
-        default: return 0;
+        case 'budgetTitle':
+          return compare(a.budgetTitle, b.budgetTitle, isAsc);
+        case 'budgetCodeId':
+          return compare(+a.budgetCodeId, +b.budgetCodeId, isAsc);
+        case 'budgetCode':
+          return compare(a.budgetCode, b.budgetCode, isAsc);
+        case 'fiscalYear':
+          return compare(+a.fiscalYear, +b.fiscalYear, isAsc);
+        default:
+          return 0;
       }
     });
   }

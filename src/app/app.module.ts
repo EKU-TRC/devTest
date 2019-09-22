@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatSortModule,
   MatInputModule,
@@ -35,7 +36,7 @@ import { MatListModule } from '@angular/material/list';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import {GetBudgetCodeService} from './shared/budgetCodeGetService';
+import {GetBudgetCodeService} from './shared/budgetCodeGet.service';
 import { BudgetCodeTableComponentComponent } from './budget-code-table-component/budget-code-table-component.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BudgetCodeFormComponent } from './budget-code-form/budget-code-form.component';
@@ -77,7 +78,8 @@ import { BudgetCodeFormComponent } from './budget-code-form/budget-code-form.com
     MatIconModule,
     MatListModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [GetBudgetCodeService],
   bootstrap: [AppComponent],
