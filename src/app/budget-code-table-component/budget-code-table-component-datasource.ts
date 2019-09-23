@@ -15,18 +15,21 @@ import { GetBudgetCodeService } from '../shared/budgetCodeGet.service';
 export class BudgetCodeTableComponentDataSource extends DataSource<
   IBudgetCode
 > {
-  constructor(private budgetService: GetBudgetCodeService) {
+  constructor(
+    private budgetService: GetBudgetCodeService) {
     super();
-    this.getBudgetCodes();
-    
+    this.budgetService = budgetService;
   }
+
   data: IBudgetCode[] = [];
   paginator: MatPaginator;
   sort: MatSort;
+
   getBudgetCodes(): void {
+    console.log(this);
     this.budgetService
       .getBudgetCodes()
-      .subscribe(budgetCodesGet => this.data = budgetCodesGet);
+      .subscribe(budgetCodesResp =>  {this.data = budgetCodesResp.data});
   }
 
 
@@ -39,12 +42,14 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
   connect(): Observable<IBudgetCode[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
-    // this.getBudgetCodes();
+    this.getBudgetCodes();
     const dataMutations = [
       observableOf(this.data),
+      this.budgetService.getBudgetCodes(),
       this.paginator.page,
-      this.sort.sortChange
+      this.sort.sortChange,
     ];
+
 
     return merge(...dataMutations).pipe(
       map(() => {

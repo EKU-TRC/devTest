@@ -26,13 +26,18 @@ export class BudgetCodeTableComponentComponent
     'budgetCodeId'
   ];
 
+  constructor(private budgets: GetBudgetCodeService) {
+
+  }
+
   ngOnInit() {
-    this.dataSource = new BudgetCodeTableComponentDataSource( new GetBudgetCodeService());
+    this.dataSource = new BudgetCodeTableComponentDataSource(this.budgets);
   }
 
   ngAfterViewInit() {
+    this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    
   }
 }
