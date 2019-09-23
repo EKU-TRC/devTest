@@ -1,9 +1,10 @@
 <div class="budget-code-form ">
-  <form [formGroup]="budgetCode" novalidate (ngSubmit)="onSubmit()">
+  <form [formGroup]="budgetCode"  (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card mat-elevation-z16">
       <mat-card-header>
         <h3 class="mat-display-1">Submit New Budget</h3>
       </mat-card-header>
+      <br/><mat-error *ngIf="submissionError!=''">{{submissionError}}</mat-error>
       <mat-card-content>
         <div class="row">
           <div class="col">
@@ -30,7 +31,7 @@
         <div class="row">
             <div class="col">
               <mat-form-field class="full-width" appearance="outline">
-                <input
+                <input 
                   matInput
                   placeholder="Budget Code"
                   matInput
@@ -50,7 +51,7 @@
           <div class="row">
               <div class="col">
                 <mat-form-field class="full-width" appearance="outline">
-                  <input
+                  <input 
                     matInput
                     placeholder="Fiscal Year"
                     matInput

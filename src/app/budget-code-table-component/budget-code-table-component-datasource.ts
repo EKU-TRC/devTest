@@ -18,15 +18,18 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
   constructor(private budgetService: GetBudgetCodeService) {
     super();
     this.getBudgetCodes();
+    
   }
-  data: IBudgetCode[];
+  data: IBudgetCode[] = [];
   paginator: MatPaginator;
   sort: MatSort;
   getBudgetCodes(): void {
     this.budgetService
       .getBudgetCodes()
-      .subscribe(budgetCodes => (this.data = budgetCodes));
+      .subscribe(budgetCodesGet => this.data = budgetCodesGet);
   }
+
+
 
   /**
    * Connect this data source to the table. The table will only update when
@@ -36,6 +39,7 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
   connect(): Observable<IBudgetCode[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
+    // this.getBudgetCodes();
     const dataMutations = [
       observableOf(this.data),
       this.paginator.page,

@@ -27,9 +27,7 @@ export class BudgetCodeTableComponentComponent
   ];
 
   ngOnInit() {
-    this.dataSource = new BudgetCodeTableComponentDataSource(
-      new GetBudgetCodeService()
-    );
+    this.dataSource = new BudgetCodeTableComponentDataSource( new GetBudgetCodeService());
   }
 
   ngAfterViewInit() {

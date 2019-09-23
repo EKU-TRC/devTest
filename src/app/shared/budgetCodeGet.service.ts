@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IBudgetCode } from '../budget-code/budget-code.model';
 import { Observable, of } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { IapiResponse } from './IapiResponse.model';
 
 const budgetCodes: IBudgetCode[] = [
   {
@@ -233,17 +235,36 @@ const budgetCodes: IBudgetCode[] = [
   }
 ];
 
+
 @Injectable()
 export class GetBudgetCodeService {
-  constructor() {
+  constructor(private http: HttpClient ) {
     /*http*/
   }
+  private getSingleUrl = 'https://uat.trc.eku.edu/budgetcodeexam/api/id/'; // + id;
+  private getAllUrl = 'https://uat.trc.eku.edu/budgetcodeexam/api/all';
+  private postUrl = 'https://uat.trc.eku.edu/budgetcodeexam/api/add';
 
- getBudgetCodes(): Observable<IBudgetCode[]> {
-    return of(budgetCodes);
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  getBudgetCode(budgetId: number): Observable<IBudgetCode[]> {
+    return this.http.get<IBudgetCode[]>(this.getSingleUrl + budgetId);
   }
 
-   getBudgetCode(budgetId: number): Observable<IBudgetCode> {
-    return of(budgetCodes[budgetId]);
+
+  getBudgetCodes(): Observable<IBudgetCode[]> {
+    return this.http.get<IBudgetCode[]>(this.getAllUrl);
   }
+
+  postBudgetCode( budget: IBudgetCode): Observable<any> {
+    return this.http.post<IBudgetCode>(this.postUrl, budget, this.httpOptions);
+  }
+//  getBudgetCodes(): Observable<IBudgetCode[]> {
+//     return of(budgetCodes);
+//   }
+
+  //  getBudgetCode(budgetId: number): Observable<IBudgetCode> {
+  //   return of(budgetCodes[budgetId]);
+  // }
 }
