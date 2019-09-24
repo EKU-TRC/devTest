@@ -17,6 +17,7 @@ export class BudgetCodeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private budgetService: GetBudgetCodeService) { }
   getBudget(id: number): void {
     this.budgetService.getBudgetCode(id).subscribe(
+    //  @ts-ignore
       budgetCodeGet => this.budgetCode = budgetCodeGet.data);
   }
 

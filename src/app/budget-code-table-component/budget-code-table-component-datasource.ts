@@ -27,6 +27,7 @@ export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
 
   getBudgetCodes(): void {
     this.budgetService.getBudgetCodes().subscribe(budgetCodesResp => {
+       //  @ts-ignore
       this.data = budgetCodesResp.data;
     });
   }
@@ -36,6 +37,7 @@ export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
+   //  @ts-ignore
   connect(): Observable<IBudgetCode[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
@@ -80,7 +82,8 @@ export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
    */
   private getSortedData(data: IBudgetCode[]) {
     if (!this.sort.active || this.sort.direction === '') {
-      return  (data !== [])? data: [{budgetTitle: 'Sorry, no results returned'}];
+      return  (data !== []) ? data : data = 
+      [{budgetTitle: 'Sorry, no results returned.', budgetCode: '', budgetCodeId: 0, fiscalYear: 404}];
     }
 
     return data.sort((a, b) => {
