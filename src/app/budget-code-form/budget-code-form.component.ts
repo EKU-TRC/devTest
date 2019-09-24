@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BudgetCodeFormComponent {
   budgetCode = this.fb.group({
-    fiscalYear: [null, Validators.required],
+    fiscalYear: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.min(1700), Validators.max(3000)]],
     budgetCode: [null, Validators.required],
     budgetTitle: [null, Validators.required]
   });

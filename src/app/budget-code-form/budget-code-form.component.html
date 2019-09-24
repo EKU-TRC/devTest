@@ -66,6 +66,11 @@
                   >
                     Fiscal Year is <strong>required</strong>
                   </mat-error>
+                  <mat-error
+                    *ngIf="budgetCode.controls['fiscalYear'].hasError('minLength') || budgetCode.controls['fiscalYear'].hasError('maxLength') ||budgetCode.controls['fiscalYear'].hasError('min') || budgetCode.controls['fiscalYear'].hasError('max')"
+                  >
+                    Fiscal Year is <strong>outside of acceptable range</strong>
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>

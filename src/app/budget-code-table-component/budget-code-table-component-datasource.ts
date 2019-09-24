@@ -42,7 +42,7 @@ export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
     // this.data = this.filteredData;
     this.getBudgetCodes();
     const dataMutations = [
-      observableOf(this.filteredData || this.data),
+      observableOf(this.filteredData),
       this.budgetService.getBudgetCodes(),
       this.paginator.page,
       this.sort.sortChange
@@ -80,7 +80,7 @@ export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
    */
   private getSortedData(data: IBudgetCode[]) {
     if (!this.sort.active || this.sort.direction === '') {
-      return data;
+      return  (data !== [])? data: [{budgetTitle: 'Sorry, no results returned'}];
     }
 
     return data.sort((a, b) => {
