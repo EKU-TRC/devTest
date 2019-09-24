@@ -1,4 +1,5 @@
-import { DataSource } from '@angular/cdk/collections';
+// import { DataSource } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
@@ -12,11 +13,10 @@ import { GetBudgetCodeService } from '../shared/budgetCodeGet.service';
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class BudgetCodeTableComponentDataSource extends DataSource<
+export class BudgetCodeTableComponentDataSource extends MatTableDataSource<
   IBudgetCode
 > {
-  constructor(
-    private budgetService: GetBudgetCodeService) {
+  constructor(private budgetService: GetBudgetCodeService) {
     super();
     this.budgetService = budgetService;
   }
@@ -26,13 +26,10 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
   sort: MatSort;
 
   getBudgetCodes(): void {
-    console.log(this);
-    this.budgetService
-      .getBudgetCodes()
-      .subscribe(budgetCodesResp =>  {this.data = budgetCodesResp.data});
+    this.budgetService.getBudgetCodes().subscribe(budgetCodesResp => {
+      this.data = budgetCodesResp.data;
+    });
   }
-
-
 
   /**
    * Connect this data source to the table. The table will only update when
@@ -42,18 +39,18 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
   connect(): Observable<IBudgetCode[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
+    // this.data = this.filteredData;
     this.getBudgetCodes();
     const dataMutations = [
-      observableOf(this.data),
+      observableOf(this.filteredData || this.data),
       this.budgetService.getBudgetCodes(),
       this.paginator.page,
-      this.sort.sortChange,
+      this.sort.sortChange
     ];
-
 
     return merge(...dataMutations).pipe(
       map(() => {
-        return this.getPagedData(this.getSortedData([...this.data]));
+        return this.getPagedData(this.getSortedData([...this.filteredData]));
       })
     );
   }
@@ -72,6 +69,10 @@ export class BudgetCodeTableComponentDataSource extends DataSource<
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
+
+  // private getFilteredData(data: IBudgetCode[]){
+  //   return this.filteredData;
+  // }
 
   /**
    * Sort the data (client-side). If you're using server-side sorting,

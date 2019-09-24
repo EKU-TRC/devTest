@@ -26,8 +26,11 @@ export class BudgetCodeTableComponentComponent
     'budgetCodeId'
   ];
 
-  constructor(private budgets: GetBudgetCodeService) {
+  constructor(private budgets: GetBudgetCodeService) {}
 
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.sort.sortChange.next();
   }
 
   ngOnInit() {
@@ -38,6 +41,5 @@ export class BudgetCodeTableComponentComponent
     this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    
   }
 }

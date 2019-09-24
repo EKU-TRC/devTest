@@ -9,6 +9,4 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
 
 export class AppComponent {
   title = 'Budget Codes';
-
-
 }
