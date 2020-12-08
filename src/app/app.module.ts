@@ -10,11 +10,17 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModule, MatExpansionModule, MatDividerModule, MatStepperModule, MatRadioModule, MatTreeModule, MatBottomSheet, MatBottomSheetModule, MatProgressBarModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { AddCodeComponent } from './add-code/add-code.component';
+import { CodeListComponent } from './code-list/code-list.component';
+import { CodeItemComponent } from './code-list/code-item/code-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddCodeComponent,
+    CodeListComponent,
+    CodeItemComponent
   ],
   imports: [
     BrowserModule,
