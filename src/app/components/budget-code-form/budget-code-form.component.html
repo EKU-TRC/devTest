@@ -1,1 +1,25 @@
-<p>budget-code-form works!</p>
+<!--
+    Budget Codes Form Component HTML
+
+    author: Kenneth Carroll
+    date: 12/8/2020
+    revision: 1
+
+-->
+
+<div class="form">
+    <mat-form-field appearance="standard">
+        <mat-label>Budget Code</mat-label>
+        <input matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Budget Title</mat-label>
+        <input matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Fiscal Year</mat-label>
+        <input matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
+    </mat-form-field>
+</div>
+
+<button mat-stroked-button class="form__button"(click)="onSubmit()">Submit</button>

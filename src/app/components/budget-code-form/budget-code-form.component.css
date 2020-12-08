@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+}
+.mat-form-field {
+    margin: 0 1rem;
+}
+.mat-stroked-button {
+    max-width: 3rem;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}

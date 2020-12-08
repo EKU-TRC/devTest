@@ -7,7 +7,7 @@
  */
 
 // angular imports
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 // rxjs imports
 import { Subscription } from 'rxjs';
@@ -22,7 +22,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
   templateUrl: './budget-codes-list.component.html',
   styleUrls: ['./budget-codes-list.component.css']
 })
-export class BudgetCodesListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class BudgetCodesListComponent implements OnInit, OnDestroy {
 
   // internal array of budget codes for template access
   budgetCodes: BudgetCode[] = [];
@@ -64,9 +64,6 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy, AfterViewIni
       //update total codes
       this.totalCodes = codeData.count;
     })
-  }
-
-  ngAfterViewInit() {
   }
 
   ngOnDestroy() {

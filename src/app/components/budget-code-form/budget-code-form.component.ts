@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 
 // local imports
 import { BudgetCode } from '../../shared/models/budget-code.model';
+import { BudgetCodesService } from '../../shared/services/budget-codes.service';
+
 
 
 @Component({
@@ -20,9 +22,15 @@ import { BudgetCode } from '../../shared/models/budget-code.model';
 })
 export class BudgetCodeFormComponent implements OnInit {
 
-  constructor() { }
+
+  budgetCode: BudgetCode = new BudgetCode(null, null, null, null);
+  constructor(public budgetCodeService: BudgetCodesService) { }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log(this.budgetCode);
   }
 
 }
