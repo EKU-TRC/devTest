@@ -23,13 +23,18 @@ import { BudgetCodesService } from '../../shared/services/budget-codes.service';
 export class BudgetCodeFormComponent implements OnInit {
 
 
+  // public budget code for handling the input from the form
   budgetCode: BudgetCode = new BudgetCode(null, null, null, null);
+
+  // add the budget code service upon construction
   constructor(public budgetCodeService: BudgetCodesService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
+
+    // dummy submission to be replaced with the service call
     console.log(this.budgetCode);
   }
 

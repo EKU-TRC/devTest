@@ -7,19 +7,28 @@
 
 -->
 
+<!-- Holds the form content-->
 <div class="form">
+
+    <!-- Budget Code Input bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Budget Code</mat-label>
         <input matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
     </mat-form-field>
+
+    <!-- Budget Code Title bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Budget Title</mat-label>
         <input matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
     </mat-form-field>
+
+    <!-- Fiscal Year bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Fiscal Year</mat-label>
         <input matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
     </mat-form-field>
+
 </div>
 
+<!-- Button for form submission-->
 <button mat-stroked-button class="form__button"(click)="onSubmit()">Submit</button>
