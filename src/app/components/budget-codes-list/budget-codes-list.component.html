@@ -1,1 +1,21 @@
-<p>budget-codes-list works!</p>
+<!--
+    Budget Codes List Component HTML
+
+    author: Kenneth Carroll
+    date: 12/8/2020
+    revision: 1
+
+-->
+<table class="codes">
+    <tr class="codes__header">
+        <th class="codes__header__heading">Budget Code</th>
+        <th class="codes__header__heading">Budget Title</th>
+        <th class="codes__header__heading">Physical Year</th>
+    </tr>
+    <!-- iterate over each stored budget code for a table row-->
+    <tr *ngFor="let code of budgetCodes" class="codes__row">
+        <td class="codes__row__data">{{code.budgetCode}}</td>
+        <td class="codes__row__data">{{code.budgetTitle}}</td>
+        <td class="codes__row__data">{{code.fiscalYear}}</td>
+    </tr>
+</table>
