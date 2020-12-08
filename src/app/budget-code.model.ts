@@ -1,6 +1,12 @@
 export class BudgetCode {
-  public budgetCodeId: number;
-  public fiscalYear: number;
-  public budgetCode: string;
-  public budgetTitle: string;
+  // budgetCodeId: number;
+  fiscalYear: number;
+  budgetCode: string;
+  budgetTitle: string;
+
+  constructor(fiscalYear: number, budgetCode: string, budgetTitle: string) {
+    this.fiscalYear = fiscalYear;
+    this.budgetCode = budgetCode;
+    this.budgetTitle = budgetTitle;
+  }
 }

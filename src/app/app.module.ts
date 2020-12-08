@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatBottomSheetModule,
     HttpClientModule,
+    ReactiveFormsModule,
     [RouterModule.forRoot(appRoutes)],
   ],
   providers: [],
