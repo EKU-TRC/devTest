@@ -14,7 +14,7 @@ export class BudgetComponent implements OnInit {
 
   ngOnInit() {
     this._http.getBudgets().subscribe(data => {
-      this.budgets = data;
+      this.budgets = data.data;
       console.log(this.budgets)
     });
   }
