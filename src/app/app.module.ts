@@ -13,12 +13,14 @@ import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModul
 import { FormsModule } from '@angular/forms';
 import { BudgetCodesListComponent } from './components/budget-codes-list/budget-codes-list.component';
 import { BudgetCodeFormComponent } from './components/budget-code-form/budget-code-form.component';
+import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BudgetCodesListComponent,
-    BudgetCodeFormComponent
+    BudgetCodeFormComponent,
+    NavigationHeaderComponent
   ],
   imports: [
     BrowserModule,

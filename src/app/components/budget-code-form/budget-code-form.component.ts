@@ -8,6 +8,7 @@
 
 // angular imports
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // local imports
 import { BudgetCode } from '../../shared/models/budget-code.model';
@@ -24,7 +25,7 @@ export class BudgetCodeFormComponent implements OnInit {
   budgetCode: BudgetCode = new BudgetCode(null, null, null, null);
 
   // add the budget code service upon construction
-  constructor(public budgetCodeService: BudgetCodesService) { }
+  constructor(private budgetCodeService: BudgetCodesService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -33,6 +34,7 @@ export class BudgetCodeFormComponent implements OnInit {
 
     // dummy submission to be replaced with the service call
     this.budgetCodeService.postNewBudgetCode(this.budgetCode);
+    this.router.navigate(['/']);
   }
 
 }

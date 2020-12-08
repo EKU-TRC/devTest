@@ -3,7 +3,7 @@
  * 
  * author: Kenneth Carroll
  * date: 12/8/2020
- * revision: 2
+ * revision: 3
  */
 
 // angular imports
@@ -24,10 +24,14 @@ import { environment } from 'src/environments/environment';
 export class BudgetCodesService {
 
   //private array of budget codes
-  private budgetCodes: BudgetCode[] = []
+  private budgetCodes: BudgetCode[] = [];
+
+  //private array of distinct years
+  private distinctYears: string[] = [];
 
   //subject for subscribers
   private budgetCodesUpdated = new Subject<{codes: BudgetCode[], count: number}>();
+  private distinctYearsUpdated = new Subject<{distinctYears: string[]}>();
 
   // create an http client on construction
   constructor(private http: HttpClient) { }
@@ -63,9 +67,19 @@ export class BudgetCodesService {
         // set budget codes internal
         this.budgetCodes = codes;
 
+        // set distinct years
+        this.distinctYears = this.getAllBudgetYears(codes);
+
         // emmit copied information over the listener
         this.budgetCodesUpdated.next({codes: [...this.budgetCodes], count: codes.length})
+        this.distinctYearsUpdated.next({distinctYears: [...this.distinctYears]});
       })
+  }
+
+  // returns all budget years from the database pull
+  private getAllBudgetYears(codes: BudgetCode[]): string[] {
+    const distinctYears = [...new Set([...codes].map((code) => code.fiscalYear.toString()))];
+    return distinctYears;
   }
 
   /**
@@ -98,9 +112,14 @@ export class BudgetCodesService {
       console.log(response);
     })
   }
-  // allows access to the private subject
+  // allows access to the private code[] subject
   getBudgetCodesUpdatedListener() {
     return this.budgetCodesUpdated.asObservable();
+  }
+
+  // get access to the private year[] subject
+  getDistinctYearsListener() {
+    return this.distinctYearsUpdated.asObservable();
   }
 
   /**

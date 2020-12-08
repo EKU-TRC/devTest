@@ -13,9 +13,9 @@ import { BudgetCodeFormComponent } from './components/budget-code-form/budget-co
 import { BudgetCodesListComponent } from './components/budget-codes-list/budget-codes-list.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: "list", pathMatch: 'full'},
+  {path: '', redirectTo: "list/", pathMatch: 'full'},
   {path: 'form', component: BudgetCodeFormComponent},
-  {path: 'list', component: BudgetCodesListComponent}
+  {path: 'list/:filter', component: BudgetCodesListComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,11 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+.mat-form-field-flex {
+    height: 2rem;
+}

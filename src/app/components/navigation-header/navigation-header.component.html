@@ -1,0 +1,11 @@
+<div class="navigation">
+    <mat-form-field appearance="standard">
+        <mat-label>Filter By Year</mat-label>
+        <mat-select (selectionChange)="navigateToList($event.value)">
+            <mat-option *ngFor="let year of years" [value]="year">
+                {{year}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="navigateToForm()">New</button>
+</div>
