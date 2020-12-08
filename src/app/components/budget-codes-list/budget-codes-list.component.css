@@ -3,11 +3,24 @@
  *
  *  author: Kenneth Carroll
  *  date: 12/8/2020
- *  revision: 1
+ *  revision: 2
  *
 */
 
-.codes {
+
+table {
+    width: 80%;
+    margin: 2rem;
+    margin: auto;
+}
+
+.mat-paginator {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*.codes {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -33,3 +46,4 @@
     background-color: rgba(130,13, 13, 1);
     color: white;
 }
+*/
