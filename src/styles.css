@@ -13,9 +13,16 @@ body {
 
 header {
   background: #4C151E;
-  padding: 1em 0;
-
+  padding: 1.5em 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
+
+.content {
+  margin-top: 5em;
+}
+
 header a {
     color: white;
     text-decoration: none;

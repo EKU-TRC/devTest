@@ -1,7 +1,7 @@
 <h1>Budget Codes</h1>
 
 <ul *ngIf="budgets">
-  <li *ngFor="let budget of budgets">
+  <li *ngFor="let budget of budgets.data">
     <p class="title">{{ budget.budgetTitle }}</p>
     <p class="code">{{ budget.budgetCode }}</p>
   </li>
