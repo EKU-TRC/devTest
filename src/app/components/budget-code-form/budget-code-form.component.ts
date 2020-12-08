@@ -35,7 +35,7 @@ export class BudgetCodeFormComponent implements OnInit {
   onSubmit() {
 
     // dummy submission to be replaced with the service call
-    console.log(this.budgetCode);
+    this.budgetCodeService.postNewBudgetCode(this.budgetCode);
   }
 
 }

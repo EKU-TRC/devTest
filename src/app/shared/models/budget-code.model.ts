@@ -3,7 +3,7 @@
  * 
  * author: Kenneth Carroll
  * date: 12/8/2020
- * revision: 1
+ * revision: 2
  */
 export class BudgetCode {
 
@@ -14,4 +14,14 @@ export class BudgetCode {
         public budgetCode: string,
         public budgetTitle: string
     ){}
+
+    // Return key value pairs that match the casing from api post request documentation
+    toPayloadFormat(): {} {
+        return{
+            "BudgetCodeId": this.budgetCodeId,
+            "FiscalYear": this.fiscalYear,
+            "BudgetCode": this.budgetCode,
+            "BudgetTitle": this.budgetTitle
+        };
+    }
 }

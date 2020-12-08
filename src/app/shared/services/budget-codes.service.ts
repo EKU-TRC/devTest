@@ -33,10 +33,9 @@ export class BudgetCodesService {
   constructor(private http: HttpClient) { }
 
   /**
-   * functoin to pull all budget codes from hte api
+   * function to pull all budget codes from the api
    */
   getAllBudgetCodes() {
-
     // make http request, data separated for readability, api url read from environment
     this.http.get<{
         results: string, 
@@ -69,8 +68,44 @@ export class BudgetCodesService {
       })
   }
 
+  /**
+   * function to post a new budget code to the api
+   */
+
+  postNewBudgetCode(newCode: BudgetCode) {
+
+    // id field is initially null, this assigns an available value
+    newCode.budgetCodeId = this.validIdFromArray();
+
+    const payload = newCode.toPayloadFormat();
+    
+    // make the request to the api
+    this.http.post<{
+      results: string, 
+      message: string, 
+      data: {
+        budgetCodeId: number, 
+        fiscalYear: number, 
+        budgetCode: string, 
+        budgetTitle: string
+      }[]
+    }>(environment.budgetCodeApi + 'add', payload)
+    .subscribe((response) => {
+
+      // log response from the api
+      console.log(response);
+    })
+  }
   // allows access to the private subject
   getBudgetCodesUpdatedListener() {
     return this.budgetCodesUpdated.asObservable();
+  }
+
+  /**
+   * function to get the next valid id 
+   */
+  private validIdFromArray(): number {
+    // finds the highest ID value and increments by 1
+    return Math.max(...this.budgetCodes.map((code) => {return code.budgetCodeId;}), 0) + 1;
   }
 }
