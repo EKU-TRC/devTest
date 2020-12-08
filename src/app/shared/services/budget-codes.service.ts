@@ -77,6 +77,7 @@ export class BudgetCodesService {
     // id field is initially null, this assigns an available value
     newCode.budgetCodeId = this.validIdFromArray();
 
+    // save new budget code in payload format
     const payload = newCode.toPayloadFormat();
     
     // make the request to the api
@@ -89,6 +90,7 @@ export class BudgetCodesService {
         budgetCode: string, 
         budgetTitle: string
       }[]
+      // use the api url, send payload over body
     }>(environment.budgetCodeApi + 'add', payload)
     .subscribe((response) => {
 
