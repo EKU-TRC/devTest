@@ -17,47 +17,65 @@
 
 
 <div class="container">
+  <h1 class="title">List of Budget Codes</h1>
   <div class="row">
     <div class="col-xs-12 col-md-10">
-    <h1 class="title">List of Budget Codes</h1>
-    <div>
-    <div class="search">
-    <form [formGroup]="searchForm" class="form-inline">
-    <div class="form-group">
-      <input
-      type="text"
-      placeholder="search"
-      formControlName="searchKey"
-      (change)="this.filterCodes()"
-      class="searchInput">
-      <select formControlName="searchCategory" class="form-control" class="searchOption">
-          <option >{{searchCategories[0]}}</option>
-          <option>{{searchCategories[1]}}</option>
-          <option>{{searchCategories[2]}}</option>
-      </select>
+      <div class="search-and-sort">
+        <div class="search">
+          <form [formGroup]="searchForm" class="form-inline">
+            <div class="form-group">
+              <input
+                type="text"
+                placeholder="search"
+                formControlName="searchKey"
+                (change)="this.filterCodes()"
+                class="searchInput">
+              <select
+                formControlName="searchCategory"  class="form-control" class="search-option">
+                <option *ngFor="let searchCat of searchCategories" [ngValue]="searchCat">{{searchCat}}</option>
+                <!-- <option >{{searchCategories[0]}}</option>
+                <option>{{searchCategories[1]}}</option>
+                <option>{{searchCategories[2]}}</option> -->
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="sort">
+          <form [formGroup]="sortForm">
+            
+            <select
+                formControlName="sortCategory"  class="form-control" class="search-option"
+                (change)="onSortCodes()">
+                <option *ngFor="let sortCat of sortCategories" [ngValue]="sortCat">{{sortCat}}</option>
+                <!-- <option >{{sortCategories[0]}}</option>
+                <option>{{sortCategories[1]}}</option>
+                <option>{{sortCategories[2]}}</option>
+                <option >{{sortCategories[3]}}</option>
+                <option>{{sortCategories[4]}}</option>
+                <option>{{sortCategories[5]}}</option> -->
+              </select>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped" *ngIf="!fetchError">
+        <thead>
+          <tr>
+            <th scope="col">Fiscal Year</th>
+            <th scope="col">Budget Code</th>
+            <th scope="col">Budget Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let code of codes">
+            <td>{{code.fiscalYear}}</td>
+            <td>{{code.budgetCode}}</td>
+            <td>{{code.budgetTitle}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-  </div>
-</form>
-</div>
-</div>
-    <table class="table table-striped" *ngIf="!fetchError">
-      <thead>
-        <tr>
-          <th scope="col">Fiscal Year</th>
-          <th scope="col">Budget Code</th>
-          <th scope="col">Budget Title</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let code of codes">
-          <td>{{code.fiscalYear}}</td>
-          <td>{{code.budgetCode}}</td>
-          <td>{{code.budgetTitle}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="fetchError">An error occurred</div>
+      <div *ngIf="fetchError">An error occurred</div>
     </div>
   </div>
-  </div>
+</div>
 

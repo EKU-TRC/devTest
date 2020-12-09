@@ -1,12 +1,16 @@
 .title {
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 
 table:nth-child(even) {
-  background: lightgray;
+  background: darkgray !important;
 }
 
+.search-and-sort {
+  margin-bottom: 4rem;
+}
 .search {
+  float: left;
   width: 50%;
 }
 /* .searchInput {
@@ -15,3 +19,7 @@ table:nth-child(even) {
 .searchOption {
   width: 30%;
 } */
+.sort {
+  float: right;
+  width: 30%;
+}
