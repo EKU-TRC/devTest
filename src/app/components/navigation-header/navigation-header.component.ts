@@ -34,13 +34,19 @@ export class NavigationHeaderComponent implements OnInit, OnDestroy{
     this.yearsSub = this.budgetCodeService.getDistinctYearsListener()
       .subscribe((data) => {
 
-        // append the years
+        // append the years while maintaining an All Years option in the nav/filter
         this.years = [...this.years, ...data.distinctYears.sort()];
       })
   }
 
   // navigate to list with optional filter
   navigateToList(value: string) {
+
+    // removes All%20Years from the url to maintain a clean route structure
+    if(value === "All Years") {
+      value = "";
+    }
+    // any other value triggers the navigation
     this.router.navigate(['/list/', value]);
   }
 

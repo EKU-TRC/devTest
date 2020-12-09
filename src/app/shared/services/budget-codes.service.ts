@@ -2,8 +2,8 @@
  * Budget Code List Component Typescript
  * 
  * author: Kenneth Carroll
- * date: 12/8/2020
- * revision: 3
+ * date: 12/9/2020
+ * revision: 4
  */
 
 // angular imports
@@ -33,7 +33,12 @@ export class BudgetCodesService {
   private yearBudgetCodes: BudgetCode[] = [];
 
   //subject for subscribers
-  private budgetCodesUpdated = new Subject<{codes: BudgetCode[], count: number}>();
+  private budgetCodesUpdated = new Subject<{
+    codes: BudgetCode[], 
+    count: number,
+    message: string,
+    status: string
+  }>();
   private distinctYearsUpdated = new Subject<{distinctYears: string[]}>();
 
   // create an http client on construction
@@ -56,33 +61,80 @@ export class BudgetCodesService {
 
       // pipe the results
       .pipe(map((codeData) => {
+        
+        // check for successful data return
+        if(codeData.results === "Success"){
 
-        // map to the data model
-        return codeData.data.map(code => {
-          return new BudgetCode(
-            code.budgetCodeId,
-            code.fiscalYear,
-            code.budgetCode,
-            code.budgetTitle
-          );
-        })
-      })).subscribe((codes)=> {
+          // transform objects into BudgetCode instances
+          let codes = codeData.data.map(code => {
+            return new BudgetCode(
+              code.budgetCodeId,
+              code.fiscalYear,
+              code.budgetCode,
+              code.budgetTitle
+            );
+          });
+          // map to the data model
+          return {codes: codes, message: codeData.message, status: codeData.results}
+
+          // api did not return a success
+        } else {
+
+          // return safe data values
+          return {
+            // empty array to prevent iteration errors
+            codes: [], 
+            // user readable message, more descriptive than "not found"
+            message: "Unable to retrieve budget codes at this time", 
+            // provide status to necessary components
+            status: codeData.results}
+        }
+        
+  
+      })).subscribe((transformedData)=> {
+        // uncomment to quickly testing error handling
+        //transformedData = {codes:[], message: "Unable to retrieve budget codes at this time", status: "Failed"}
+        
         // set budget codes internal
-        this.budgetCodes = codes;
+        this.budgetCodes = transformedData.codes;
 
         // set distinct years
-        this.distinctYears = this.getAllBudgetYears(codes);
+        this.distinctYears = this.getAllBudgetYears(transformedData.codes);
+
+        // send any errors to the console
+        if(transformedData.status !== "Success") {
+          console.error(transformedData.message);
+        }
 
         // emmit copied information over the listener
-        this.budgetCodesUpdated.next({codes: [...this.budgetCodes], count: codes.length})
+        this.budgetCodesUpdated.next({
+          codes: [...this.budgetCodes], 
+          count: transformedData.codes.length,
+          message: transformedData.message,
+          status: transformedData.status
+        })
+
+        //emmit distinct years for year filtering
         this.distinctYearsUpdated.next({distinctYears: [...this.distinctYears]});
       })
   }
 
+  /**
+   * 
+   * @param year 
+   * Method to accept a year, query api for that year,
+   * and update listenting components to only have data
+   * for that given year
+   */
   getBudgetCodeByYear(year: string) {
+
     // check for YYYY notation using regular expression
     if(!year.match(/^\d{4}$/)){
+
+      // if it is not a year notation, retrieve all years
       this.getAllBudgetCodes();
+
+      // prevent API call below
       return;
     }
 
@@ -98,26 +150,53 @@ export class BudgetCodesService {
       }>(environment.budgetCodeApi + 'year/' + year)
     // pipe the data
     .pipe(map(codeData=> {
-      return codeData.data.map(code=> {
-        return new BudgetCode(
-          code.budgetCodeId,
-          code.fiscalYear,
-          code.budgetCode,
-          code.budgetTitle
-        );
-      })
-      // subscripe to the transformed remotes
-    })).subscribe(codes => {
+
+      // check for data success
+      if(codeData.results === "Success") {
+        
+        //map codes to actual BudgetCode Objects
+        let codes = codeData.data.map(code=> {
+          return new BudgetCode(
+            code.budgetCodeId,
+            code.fiscalYear,
+            code.budgetCode,
+            code.budgetTitle
+          );
+        })
+
+        // return successful data
+        return {codes: codes, message: codeData.message, status: codeData.results}
+
+        // the api did not return a successful query
+      } else {
+
+        // return proper error message and safe data
+        return {
+          // returns and empty code array to keep iteration
+          codes: [], 
+          //converts message to something more understandable to the user
+          message: "Unable to find any Budget Codes for that given year", 
+          status: codeData.results}
+      }
+      // subscripe to the transformed data
+    })).subscribe(transformedData => {
 
       // update the internal store
-      this.yearBudgetCodes = codes;
+      this.yearBudgetCodes = transformedData.codes;
 
-      // emit to componenet
-      this.budgetCodesUpdated.next({codes: [...this.yearBudgetCodes], count: codes.length});
+      // send any errors to the console
+      if(transformedData.status !== "Success") {
+        console.error(transformedData.message);
+      }
+
+      // emit to componet
+      this.budgetCodesUpdated.next({
+        codes: [...this.yearBudgetCodes], 
+        count: transformedData.codes.length, 
+        message: transformedData.message,
+        status: transformedData.status
+      });
     })
-
-    
-
   }
 
   // returns all budget years from the database pull
@@ -152,6 +231,10 @@ export class BudgetCodesService {
     }>(environment.budgetCodeApi + 'add', payload)
     .subscribe((response) => {
 
+      // console error any issues
+      if(response.results !== "Success") {
+        console.error(response.message);
+      }
       // log response from the api
       console.log(response);
     })
@@ -170,7 +253,7 @@ export class BudgetCodesService {
    * function to get the next valid id 
    */
   private validIdFromArray(): number {
-    // finds the highest ID value and increments by 1
+    // finds the highest ID value in local store and increments by 1
     return Math.max(...this.budgetCodes.map((code) => {return code.budgetCodeId;}), 0) + 1;
   }
 }

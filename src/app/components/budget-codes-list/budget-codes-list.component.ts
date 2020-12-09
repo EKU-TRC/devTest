@@ -45,44 +45,56 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
   private codeSub: Subscription
 
   // private member initialization
-  constructor(private budgetCodeService: BudgetCodesService, private router: Router) { 
+  constructor(
+    private budgetCodeService: BudgetCodesService, 
+    private router: Router) { }
+
+  ngOnInit() {
 
     //triggers on router Navigation Start Events
     this.router.events.pipe(filter(event => event instanceof NavigationStart))
 
-      // subscribe to teh event which has the following structure
-      .subscribe((nav: {id: number, url: string, navigationTrigger: string, restoredState: any}) => {
+    // subscribe to teh event which has the following structure
+    .subscribe((nav: {id: number, url: string, navigationTrigger: string, restoredState: any}) => {
 
-        // use the resultant url to call the year based service
-        const year = nav.url.substr(6);
+      // use the resultant url to call the year based service "/list/" is 6 characters
+      const year = nav.url.substr(6);
 
-        // budget service is called with year validation handled in service
-        this.budgetCodeService.getBudgetCodeByYear(year);
-        
-      })
-  }
+      // budget service is called with year validation handled in service
+      this.budgetCodeService.getBudgetCodeByYear(year);
+      
+    })
 
-  ngOnInit() {
-
-    // call the initial http request for the service
+    // call the initial http request for the service, causes the year filtering to populate
     this.budgetCodeService.getAllBudgetCodes();
 
     //subscribe to the listener
     this.codeSub = this.budgetCodeService.getBudgetCodesUpdatedListener()
-    .subscribe((codeData: {codes: BudgetCode[], count: number}) => {
+    .subscribe((codeData: {
+      codes: BudgetCode[], 
+      count: number,
+      message: string,
+      status: string
+    }) => {
+      if(codeData.status === "Success") {
+        //update budget codes array for data display
+        this.budgetCodes = codeData.codes;
 
-      //update budget codes array for data display
-      this.budgetCodes = codeData.codes;
+        //update the padgedBudgetCodes with the new data
+        this.pagedBudgetCodes = new MatTableDataSource<BudgetCode>(this.budgetCodes);
 
-      //update the padgedBudgetCodes with the new data
-      this.pagedBudgetCodes = new MatTableDataSource<BudgetCode>(this.budgetCodes);
+        //update the paginator
+        this.pagedBudgetCodes.paginator = this.paginator;
 
-      //update the paginator
-      this.pagedBudgetCodes.paginator = this.paginator;
+        //update total codes
+        this.totalCodes = codeData.count;
+      } else {
 
-      //update total codes
-      this.totalCodes = codeData.count;
+        //alert the user to the error
+        alert(codeData.message);
+      }
     })
+      
   }
 
   ngOnDestroy() {
