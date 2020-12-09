@@ -8,9 +8,11 @@
 
 // angular imports
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router, NavigationStart } from '@angular/router'
 
 // rxjs imports
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators'
 
 // local imports
 import { BudgetCode } from '../../shared/models/budget-code.model';
@@ -41,7 +43,24 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
 
   // private subscription to the code service
   private codeSub: Subscription
-  constructor(private budgetCodeService: BudgetCodesService) { }
+
+  // private member initialization
+  constructor(private budgetCodeService: BudgetCodesService, private router: Router) { 
+
+    //triggers on router Navigation Start Events
+    this.router.events.pipe(filter(event => event instanceof NavigationStart))
+
+      // subscribe to teh event which has the following structure
+      .subscribe((nav: {id: number, url: string, navigationTrigger: string, restoredState: any}) => {
+
+        // use the resultant url to call the year based service
+        const year = nav.url.substr(6);
+
+        // budget service is called with year validation handled in service
+        this.budgetCodeService.getBudgetCodeByYear(year);
+        
+      })
+  }
 
   ngOnInit() {
 

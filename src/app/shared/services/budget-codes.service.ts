@@ -29,6 +29,9 @@ export class BudgetCodesService {
   //private array of distinct years
   private distinctYears: string[] = [];
 
+  //private array of last filtered year's budget codes
+  private yearBudgetCodes: BudgetCode[] = [];
+
   //subject for subscribers
   private budgetCodesUpdated = new Subject<{codes: BudgetCode[], count: number}>();
   private distinctYearsUpdated = new Subject<{distinctYears: string[]}>();
@@ -74,6 +77,47 @@ export class BudgetCodesService {
         this.budgetCodesUpdated.next({codes: [...this.budgetCodes], count: codes.length})
         this.distinctYearsUpdated.next({distinctYears: [...this.distinctYears]});
       })
+  }
+
+  getBudgetCodeByYear(year: string) {
+    // check for YYYY notation using regular expression
+    if(!year.match(/^\d{4}$/)){
+      this.getAllBudgetCodes();
+      return;
+    }
+
+    //make api request for specific year's budget
+    this.http.get<{
+      results: string, 
+      message: string, 
+      data: {
+        budgetCodeId: number, 
+        fiscalYear: number, 
+        budgetCode: string, 
+        budgetTitle: string}[]
+      }>(environment.budgetCodeApi + 'year/' + year)
+    // pipe the data
+    .pipe(map(codeData=> {
+      return codeData.data.map(code=> {
+        return new BudgetCode(
+          code.budgetCodeId,
+          code.fiscalYear,
+          code.budgetCode,
+          code.budgetTitle
+        );
+      })
+      // subscripe to the transformed remotes
+    })).subscribe(codes => {
+
+      // update the internal store
+      this.yearBudgetCodes = codes;
+
+      // emit to componenet
+      this.budgetCodesUpdated.next({codes: [...this.yearBudgetCodes], count: codes.length});
+    })
+
+    
+
   }
 
   // returns all budget years from the database pull
