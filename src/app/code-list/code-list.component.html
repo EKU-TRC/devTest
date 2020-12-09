@@ -19,7 +19,27 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-10">
-    <h1>List of Budget Codes</h1>
+    <h1 class="title">List of Budget Codes</h1>
+    <div>
+    <div class="search">
+    <form [formGroup]="searchForm" class="form-inline">
+    <div class="form-group">
+      <input
+      type="text"
+      placeholder="search"
+      formControlName="searchKey"
+      (change)="this.filterCodes()"
+      class="searchInput">
+      <select formControlName="searchCategory" class="form-control" class="searchOption">
+          <option >{{searchCategories[0]}}</option>
+          <option>{{searchCategories[1]}}</option>
+          <option>{{searchCategories[2]}}</option>
+      </select>
+
+  </div>
+</form>
+</div>
+</div>
     <table class="table table-striped" *ngIf="!fetchError">
       <thead>
         <tr>

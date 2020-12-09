@@ -1,34 +1,17 @@
-/* h1 {
+.title {
   margin-bottom: 3rem;
 }
-.table {
-  display: table;
-}
-.table-row {
-  display: table-row;
-}
-.table-cell {
-  display: table-cell;
-  padding: 10px;
-  border: 1px solid black;
-}
-.table-row:nth-child(even) {
-  background: lightblue;
-}
-.year {
-  width: 15%;
-  font-weight: bold;
-}
-.code {
-  width: 30%;
-  font-weight: bold;
-}
-.title {
-  width: 60%;
-  font-weight: bold;
-}
- */
+
 table:nth-child(even) {
   background: lightgray;
-
 }
+
+.search {
+  width: 50%;
+}
+/* .searchInput {
+  width: 60%;
+}
+.searchOption {
+  width: 30%;
+} */

@@ -1,5 +1,4 @@
-import { ComponentFixture } from "@angular/core/testing";
-import { ResponseData } from "./response-data";
+
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, catchError, tap } from "rxjs/operators";
