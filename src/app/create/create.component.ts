@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Budget } from './budget';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent {
 
-  constructor() { }
+  model = new Budget(100, 2020, "19234", "tester budget")
 
-  ngOnInit() {
+  onSubmit() {
+    console.log(this.model)
   }
 
 }
