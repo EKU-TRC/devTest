@@ -11,4 +11,8 @@ export class HttpService {
   getBudgets() {
     return this.http.get('https://uat.trc.eku.edu/budgetcodeexam/api/all')
   }
+
+  addBudget(createBudget) {
+    return this.http.post('https://uat.trc.eku.edu/budgetcodeexam/api/add', createBudget)
+  }
 }
