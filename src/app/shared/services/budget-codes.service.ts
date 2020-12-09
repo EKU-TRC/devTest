@@ -40,6 +40,7 @@ export class BudgetCodesService {
     status: string
   }>();
   private distinctYearsUpdated = new Subject<{distinctYears: string[]}>();
+  private formSubmissionStatus = new Subject<{status: string, message: string}>();
 
   // create an http client on construction
   constructor(private http: HttpClient) { }
@@ -210,7 +211,7 @@ export class BudgetCodesService {
    */
 
   postNewBudgetCode(newCode: BudgetCode) {
-
+    
     // id field is initially null, this assigns an available value
     newCode.budgetCodeId = this.validIdFromArray();
 
@@ -235,8 +236,9 @@ export class BudgetCodesService {
       if(response.results !== "Success") {
         console.error(response.message);
       }
-      // log response from the api
-      console.log(response);
+
+      // return the status to the form
+      this.formSubmissionStatus.next({status: response.results, message: response.message});
     })
   }
   // allows access to the private code[] subject
@@ -247,6 +249,11 @@ export class BudgetCodesService {
   // get access to the private year[] subject
   getDistinctYearsListener() {
     return this.distinctYearsUpdated.asObservable();
+  }
+
+  // get form status listener
+  getFormStatusListenter() {
+    return this.formSubmissionStatus.asObservable();
   }
 
   /**
