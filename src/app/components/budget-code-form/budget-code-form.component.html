@@ -13,19 +13,19 @@
     <!-- Budget Code Input bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Budget Code</mat-label>
-        <input matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
+        <input id="budgetCodeInput" matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
     </mat-form-field>
 
     <!-- Budget Code Title bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Budget Title</mat-label>
-        <input matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
+        <input id="budgetTitleInput" matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
     </mat-form-field>
 
     <!-- Fiscal Year bound by ngModel -->
     <mat-form-field appearance="standard">
         <mat-label>Fiscal Year</mat-label>
-        <input matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
+        <input id="fiscalYearInput" matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
     </mat-form-field>
 
 </div>
