@@ -8,7 +8,7 @@
 
 // angular imports
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, NavigationStart } from '@angular/router'
+import { Router, NavigationStart } from '@angular/router'
 
 // rxjs imports
 import { Subscription } from 'rxjs';

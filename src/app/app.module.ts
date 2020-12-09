@@ -39,6 +39,7 @@ import { NavigationHeaderComponent } from './components/navigation-header/naviga
     MatTreeModule,
     MatBottomSheetModule,
     MatProgressBarModule,
+    MatInputModule,
     FormsModule,
     MatSelectModule,
     MatCheckboxModule,
