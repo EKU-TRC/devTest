@@ -14,26 +14,42 @@ export class AddCodeComponent implements OnInit {
 
   ngOnInit() {
     this.addCodeForm = new FormGroup({
-      // budgetCodeId: new FormControl(null, [Validators.required]),
       fiscalYear: new FormControl(null, [
         Validators.required,
         this.validateYear.bind(this),
       ]),
-      budgetCode: new FormControl(null, [Validators.required]),
-      budgetTitle: new FormControl(null, [Validators.required]),
+      budgetCode: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(10),
+      ]),
+      budgetTitle: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
     });
   }
 
   onSubmit() {
-    // this.codeService.createCode();
+    this.codeService.createCode(this.addCodeForm.value);
     this.addCodeForm.reset();
   }
 
   validateYear(control: FormControl): { [s: string]: boolean } {
-    const convertedYear = Number(control.value);
-    if (convertedYear < 1970 && convertedYear > 2099) {
-      return { 'invalidYear': true };
+    if (!control.value) {
+      return null;
     }
+    const convertedYear = +control.value;
+    if (!Number.isInteger(convertedYear)) {
+      return { invalidYear: true };
+    }
+    console.log("converted year is ", convertedYear);
+    if (convertedYear < 1970 || convertedYear > 2099) {
+      console.log("fiscal year is outside of range");
+      return { invalidYear: true };
+    }
+    console.log("fiscal year is within range");
     return null;
   }
 }

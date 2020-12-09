@@ -1,1 +1,43 @@
-<p>code-list works!</p>
+<!-- <div class="container">
+<div class="row">
+  <div class="col-xs-12 col-md-10">
+  <h1>List of Budget Codes</h1>
+    <div class="table">
+      <div class="table-row">
+        <div class="table-cell year">Fiscal Year</div>
+          <div class="table-cell code">Budget Code</div>
+          <div class="table-cell title">Budget Title</div>
+      </div>
+    </div>
+    <app-code-item *ngFor="let code of codes" [code]= "code"></app-code-item>
+  </div>
+</div>
+</div> -->
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-10">
+    <h1>List of Budget Codes</h1>
+    <table class="table table-striped" *ngIf="!fetchError">
+      <thead>
+        <tr>
+          <th scope="col">Fiscal Year</th>
+          <th scope="col">Budget Code</th>
+          <th scope="col">Budget Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let code of codes">
+          <td>{{code.fiscalYear}}</td>
+          <td>{{code.budgetCode}}</td>
+          <td>{{code.budgetTitle}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="fetchError">An error occurred</div>
+    </div>
+  </div>
+  </div>
+

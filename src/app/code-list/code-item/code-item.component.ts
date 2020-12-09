@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BudgetCode } from './../../budget-code.model';
+
 
 @Component({
   selector: 'app-code-item',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./code-item.component.css']
 })
 export class CodeItemComponent implements OnInit {
+  @Input() code: BudgetCode;
 
   constructor() { }
 

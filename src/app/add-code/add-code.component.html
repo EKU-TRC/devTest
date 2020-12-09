@@ -10,14 +10,17 @@
             id="fiscalYear"
             formControlName="fiscalYear"
             class="form-control"
-            placeholder="required, should be between 1970 to 2099"
+            placeholder="required, 1970 to 2099"
             >
             <span
-            *ngIf="!addCodeForm.get('fiscalYear').valid && addCodeForm.get('fiscalYear').touched"
-            class="form-text">
-              <span *ngIf="addCodeForm.get('fiscalYear').errors['invalidYear']">Fiscal year is invalid</span>
-            Fiscal Year is required!
-          </span>
+              *ngIf="addCodeForm.get('fiscalYear').errors?.required && addCodeForm.get('fiscalYear').touched"
+              class="form-text">
+              Fiscal Year is required!
+            </span>
+            <span
+              *ngIf="addCodeForm.get('fiscalYear').errors?.invalidYear">
+              Fiscal year is invalid
+            </span>
         </div>
 
         <div class="form-group">
@@ -27,18 +30,16 @@
             id="budgetCode"
             formControlName="budgetCode"
             class="form-control"
-            placeholder="required, should be between 5 to 10 characters"
-            minlength=5
-            maxlength=10>
+            placeholder="required, 5 to 10 characters">
             <span
-            *ngIf="addCodeForm.get('budgetCode').errors['required'] && addCodeForm.get('budgetCode').touched"
+            *ngIf="addCodeForm.get('budgetCode').errors?.required && addCodeForm.get('budgetCode').touched"
             class="form-text">
             Budget Code is required!
             </span>
             <span
-            *ngIf="addCodeForm.get('budgetCode').errors['minlength']">The minimum length for Budget Code is 5</span>
-            <span
-              *ngIf="addCodeForm.get('budgetCode').errors['maxlength']">The minimum length for Budget Code is 10</span>
+              *ngIf="addCodeForm.get('budgetCode').errors?.minlength">
+              The minimum length for Budget Code is 5
+            </span>
         </div>
 
         <div class="form-group">
@@ -48,25 +49,19 @@
             id="budgetTitle"
             formControlName="budgetTitle"
             class="form-control"
-            placeholder="required, should be between 3 to 50 characters"
-            minlength=3
-            maxlength=50>
+            placeholder="required, 3 to 50 characters">
             <span
-              *ngIf="addCodeForm.get('budgetTitle').errors.required &&addCodeForm.get('budgetTitle').touched"
+              *ngIf="addCodeForm.get('budgetTitle').errors?.required &&addCodeForm.get('budgetTitle').touched"
               class="form-text">
               Budget Title is required!
             </span>
             <span
-              *ngIf="addCodeForm.get('budgetTitle').errors.minlength">
+              *ngIf="addCodeForm.get('budgetTitle').errors?.minlength">
               The minimum length for Budget Title is 3
             </span>
-            <!-- <span
-              *ngIf="addCodeForm.get('budgetTitle').errors['maxlength']">
-              The minimum length for Budget Title is 50
-            </span> -->
         </div>
 
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="addCodeForm.invalid">Submit</button>
       </form>
     </div>
   </div>

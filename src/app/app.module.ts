@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -34,7 +34,8 @@ import { CodeListComponent } from "./code-list/code-list.component";
 import { CodeItemComponent } from "./code-list/code-item/code-item.component";
 
 const appRoutes: Routes = [
-  { path: "", component: CodeListComponent },
+  { path: "", redirectTo: "view-codes", pathMatch: "full" },
+  { path: "view-codes", component: CodeListComponent },
   { path: "add-code", component: AddCodeComponent },
 ];
 
