@@ -138,5 +138,33 @@ describe('BudgetCodeFormComponent', () => {
     })
     
   }))
+  // validate spinner conditional rendering
+  it("should render mat-spinner conditionally", () => {
+
+    // initialize loading true
+    component.loading = true;
+
+    // update fixture
+    fixture.detectChanges();
+
+    // query spinner
+    let spinner = fixture.debugElement.nativeElement.querySelector('mat-spinner');
+
+    // verify render
+    expect(spinner).toBeTruthy();
+
+    // set loading false
+    component.loading = false;
+
+    // update
+    fixture.detectChanges();
+
+    // requery
+    spinner = fixture.debugElement.nativeElement.querySelector('mat-spinner');
+
+    // expect no rendering
+    expect(spinner).toBeNull();
+    
+  })
 
 });
