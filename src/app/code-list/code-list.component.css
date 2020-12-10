@@ -21,3 +21,10 @@ input, select {
   float: right;
   width: 30%;
 }
+
+@media (max-width: 600px) {
+  .search-and-sort {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

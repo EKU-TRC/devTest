@@ -27,7 +27,6 @@ export class CodeService {
     this.codes = [];
     return this.http.get(URL_ALL_CODES).subscribe((responseData) => {
       const codesData = responseData["data"];
-      console.log(codesData);
 
       for (const key in codesData) {
         if (codesData.hasOwnProperty(key)) {

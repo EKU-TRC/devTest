@@ -21,11 +21,9 @@ export class AddCodeComponent implements OnInit, OnDestroy {
     this.errorSub = this.codeService.error.subscribe((errorObject) => {
       this.hasAddError = errorObject["hasError"];
       this.errorMsg = errorObject["message"];
-      console.log("this.hasAddError: ", this.hasAddError);
       if (!this.hasAddError) {
-      console.log("Has no add error");
-      this.addCodeForm.reset();
-    }
+        this.addCodeForm.reset();
+      }
     });
     this.addCodeForm = new FormGroup({
       fiscalYear: new FormControl(null, [

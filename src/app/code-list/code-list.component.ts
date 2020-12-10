@@ -80,7 +80,6 @@ export class CodeListComponent implements OnInit {
 
   onSortCodes() {
     const selSort = this.sortForm.get("sortCategory").value;
-    console.log(selSort);
     const selSortIndex = this.sortCategories.indexOf(selSort);
     switch (selSortIndex) {
       case 0: //sort by Fiscal Year in ascending order
