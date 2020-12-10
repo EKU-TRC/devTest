@@ -87,16 +87,6 @@ describe('BudgetCodesListComponent', () => {
     
     // query paginator out of fixture
     let paginator = fixture.debugElement.nativeElement.querySelector('mat-paginator');
-    expect(paginator).toBeNull();
-
-    // hide the spinner
-    component.loading=false;
-
-    // update fixture
-    fixture.detectChanges();
-
-    // requery
-    paginator = fixture.debugElement.nativeElement.querySelector('mat-paginator');
 
     // check if exists
     expect(paginator).toBeTruthy();

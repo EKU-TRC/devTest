@@ -83,6 +83,9 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
       status: string
     }) => {
       if(codeData.status === "Success") {
+        //no longer loading
+        this.loading = false;
+
         //update budget codes array for data display
         this.budgetCodes = codeData.codes;
 
@@ -95,8 +98,6 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
         //update total codes
         this.totalCodes = codeData.count;
 
-        //no longer loading
-        this.loading = false;
       } else {
 
         //alert the user to the error
