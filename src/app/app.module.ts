@@ -3,7 +3,7 @@
  * 
  * author: Kenneth Carroll
  * date: 12/9/2020
- * revision 3
+ * revision 4
  */
 
 // angular imports
@@ -13,27 +13,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { 
-  MatSortModule, 
-  MatInputModule, 
-  MatDialogModule, 
-  MatTabsModule, 
-  MatExpansionModule, 
-  MatDividerModule, 
-  MatStepperModule, 
-  MatRadioModule, 
-  MatTreeModule, 
-  MatBottomSheetModule, 
-  MatProgressBarModule, 
-  MatSelectModule, 
-  MatTableModule } from '@angular/material';
 
 // local modules
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './shared/modules/material/material.module';
 
 // local components
 import { AppComponent } from './app.component';
@@ -53,29 +36,9 @@ import { NavigationHeaderComponent } from './components/navigation-header/naviga
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatSortModule,
-    MatDialogModule,
-    MatTabsModule,
-    MatExpansionModule,
-    MatDividerModule,
-    MatStepperModule,
-    MatTreeModule,
-    MatBottomSheetModule,
-    MatProgressBarModule,
-    MatInputModule,
     FormsModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatInputModule,
-    MatTableModule,
-    MatBottomSheetModule,
-    HttpClientModule, 
-    MatPaginatorModule
-
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
