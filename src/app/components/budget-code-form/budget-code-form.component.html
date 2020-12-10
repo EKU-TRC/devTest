@@ -7,28 +7,40 @@
 
 -->
 
-<!-- Holds the form content-->
-<div class="form">
+<!-- Conditional Rendering -->
+<div *ngIf="!loading; else showLoading">
 
-    <!-- Budget Code Input bound by ngModel -->
-    <mat-form-field appearance="standard">
-        <mat-label>Budget Code</mat-label>
-        <input id="budgetCodeInput" matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
-    </mat-form-field>
+    <!-- Holds the form content-->
+    <div class="form">
 
-    <!-- Budget Code Title bound by ngModel -->
-    <mat-form-field appearance="standard">
-        <mat-label>Budget Title</mat-label>
-        <input id="budgetTitleInput" matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
-    </mat-form-field>
+        <!-- Budget Code Input bound by ngModel -->
+        <mat-form-field appearance="standard">
+            <mat-label>Budget Code</mat-label>
+            <input id="budgetCodeInput" matInput type="text" required [(ngModel)]="budgetCode.budgetCode">
+        </mat-form-field>
 
-    <!-- Fiscal Year bound by ngModel -->
-    <mat-form-field appearance="standard">
-        <mat-label>Fiscal Year</mat-label>
-        <input id="fiscalYearInput" matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
-    </mat-form-field>
+        <!-- Budget Code Title bound by ngModel -->
+        <mat-form-field appearance="standard">
+            <mat-label>Budget Title</mat-label>
+            <input id="budgetTitleInput" matInput type="text" required [(ngModel)]="budgetCode.budgetTitle">
+        </mat-form-field>
+
+        <!-- Fiscal Year bound by ngModel -->
+        <mat-form-field appearance="standard">
+            <mat-label>Fiscal Year</mat-label>
+            <input id="fiscalYearInput" matInput type="number" required [(ngModel)]=budgetCode.fiscalYear>
+        </mat-form-field>
+
+    </div>
+
+    <!-- Button for form submission-->
+    <button mat-stroked-button class="form__button"(click)="onSubmit()">Submit</button>
 
 </div>
+<ng-template #showLoading>
+    <div class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
 
-<!-- Button for form submission-->
-<button mat-stroked-button class="form__button"(click)="onSubmit()">Submit</button>
+

@@ -28,7 +28,8 @@ import {
   MatBottomSheetModule, 
   MatProgressBarModule, 
   MatSelectModule, 
-  MatTableModule } from '@angular/material';
+  MatTableModule, 
+  MatProgressSpinnerModule} from '@angular/material';
 
 // saved to array to import/export quicker
 const modules = [
@@ -48,7 +49,8 @@ const modules = [
   MatBottomSheetModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatTableModule
+  MatTableModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({

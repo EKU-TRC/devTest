@@ -6,7 +6,9 @@
     revision: 3
 
 -->
-<div>
+
+<!-- Render if not loading-->
+<div *ngIf="!loading; else showLoading">
 
     <!-- Angular Material Table -->
     <table mat-table [dataSource]="pagedBudgetCodes">
@@ -38,3 +40,14 @@
     <!-- Angular Material Paginator-->
     <mat-paginator class="paginators"[pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
 </div>
+
+<!-- Render if loading-->
+<ng-template #showLoading>
+
+    <!-- Div for providing styling-->
+    <div class="spinner">
+
+        <!-- Spinner from Angular Materials-->
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

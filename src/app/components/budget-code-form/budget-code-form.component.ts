@@ -28,17 +28,27 @@ export class BudgetCodeFormComponent implements OnInit, OnDestroy {
   // create a subscription to verify form submission
   formStatusSub: Subscription;
 
+  // is loading boolean
+  loading: boolean;
+
   // add the budget code service upon construction
   constructor(private budgetCodeService: BudgetCodesService, private router: Router) { }
 
   ngOnInit() {
+
+    // does not pull any server data, else would be true
+    this.loading = false;
+
     // initialize form sttaus subscription
     this.formStatusSub = this.budgetCodeService.getFormStatusListenter()
     .subscribe((result: {status: string, message: string}) => {
 
+      // response from server received
+      this.loading = false;
+
       // if the submission is a success
       if(result.status === "Success") {
-
+        
         // alert user and return to original list
         alert("The budget code was successfully addeds!");
         this.router.navigate(['/']);
@@ -53,6 +63,9 @@ export class BudgetCodeFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+
+    // loading until response from server
+    this.loading = true;
 
     // submit the budget code object from the form
     this.budgetCodeService.postNewBudgetCode(this.budgetCode);

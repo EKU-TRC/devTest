@@ -41,6 +41,9 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
   // array of columns for material table rendering 
   displayedColumns: string[] = ["bCode", "bTitle", "fYear"];
 
+  // loading indication
+  loading: boolean;
+
   // private subscription to the code service
   private codeSub: Subscription
 
@@ -50,6 +53,9 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit() {
+
+    //start spinner
+    this.loading = true;
 
     //triggers on router Navigation Start Events
     this.router.events.pipe(filter(event => event instanceof NavigationStart))
@@ -88,6 +94,9 @@ export class BudgetCodesListComponent implements OnInit, OnDestroy {
 
         //update total codes
         this.totalCodes = codeData.count;
+
+        //no longer loading
+        this.loading = false;
       } else {
 
         //alert the user to the error
