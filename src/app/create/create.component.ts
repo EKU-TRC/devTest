@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { NewBudget } from './create.interface';
 import { HttpService } from '../http.service';
+import { Budget } from '../budget/budget.interface';
 
 @Component({
   selector: 'app-create',
@@ -7,19 +9,18 @@ import { HttpService } from '../http.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  results = null;
+  results: boolean;
   constructor(public http: HttpService) { }
 
   onSubmit(form) {
-    const newBudgetData = {
+    const newBudgetData: NewBudget = {
       BudgeCodeId: form.value.BudgetCodeId,
       FiscalYear: form.value.FiscalYear,
       BudgetCode: form.value.BudgetCode,
       BudgetTitle: form.value.BudgetTitle
     };
-    this.http.addBudget(newBudgetData).subscribe(data => {
-      const key = 'results';
-      data[key] === 'Success' ? this.results = true : this.results = false;
+    this.http.addBudget(newBudgetData).subscribe(({results}: {results: string}) => {
+      results === 'Success' ? this.results = true : this.results = false;
     });
   }
 }

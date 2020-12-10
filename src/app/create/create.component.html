@@ -12,7 +12,7 @@
     >
     <!-- add validations -->
 
-    <label for="BudgetCode">Budget Code </label>
+    <label for="BudgetCode">Budget Code: </label>
     <input type="text" class="form-control" id="BudgetCode" 
     required ngModel name="BudgetCode" #BudgetCode
     >
@@ -28,5 +28,5 @@
   </div>
 </form>
 <br>
-<div *ngIf="results">Crated Successfully</div>
-<div *ngIf="results === false">Something went wrong, try again.</div>
+<div *ngIf="results">Created Successfully</div>
+<div *ngIf="!results">Something went wrong, try again.</div>

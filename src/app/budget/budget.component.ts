@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { Budget, BudgetResponse } from './budget.interface';
 
 @Component({
   selector: 'app-budget',
@@ -8,15 +9,14 @@ import { HttpService } from '../http.service';
 })
 export class BudgetComponent implements OnInit {
 
-  budgets: Object;
+  budgets: Budget[];
 
-  constructor(private _http: HttpService) { }
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
-    this._http.getBudgets().subscribe(data => {
-      this.budgets = data;
-      console.log(this.budgets)
+    this.http.getBudgets().subscribe((response: BudgetResponse) => {
+      this.budgets = response.data;
+      console.log(this.budgets);
     });
   }
-
 }
