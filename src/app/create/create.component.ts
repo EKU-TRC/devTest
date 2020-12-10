@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NewBudget } from './create.interface';
 import { HttpService } from '../http.service';
-import { Budget } from '../budget/budget.interface';
+// import { Budget } from '../budget/budget.interface';
 
 @Component({
   selector: 'app-create',
