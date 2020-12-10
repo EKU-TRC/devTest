@@ -1,0 +1,28 @@
+<h1>Create Budget</h1>
+
+<form #budgetForm="ngForm" (ngSubmit)="onSubmit(budgetForm)">
+  <div class="form-group">
+    <label for="BudgetTitle">Budget Title:</label>
+    <input type="text" class="form-control" id="BudgetTitle" 
+    required ngModel name="BudgetTitle" #BudgetTitle
+    >
+    <!-- add validations -->
+
+    <label for="BudgetCode">Budget Code: </label>
+    <input type="text" class="form-control" id="BudgetCode" 
+    required ngModel name="BudgetCode" #BudgetCode
+    >
+      <!-- add validations -->
+
+    <label for="FiscalYear">Fiscal Year: </label>
+    <input type="number" class="form-control" id="FiscalYear" 
+    required ngModel name="FiscalYear" #FiscalYear
+    >
+      <!-- add validations -->
+
+    <button type="submit" class="btn btn-success">Add Budget</button>
+  </div>
+</form>
+<br>
+<div *ngIf="results">Created Successfully</div>
+<div *ngIf="results===false">Something went wrong, try again.</div>

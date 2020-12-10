@@ -1,0 +1,17 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.form-control {
+  margin: 5px 0 5px 0;
+  padding: 7px;
+  width: 80%;
+}
+
+.btn {
+  width: 30%;
+  margin-top: 5px;
+  padding: 7px;
+}
