@@ -7,13 +7,14 @@
  * 
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import {
   MatFormFieldModule, 
   MatInputModule, 
   MatPaginatorModule, 
   MatSelectModule, 
+  MatTableDataSource, 
   MatTableModule
 } from '@angular/material'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
@@ -23,6 +24,7 @@ import { BudgetCodesListComponent } from './budget-codes-list.component';
 
 import { BudgetCodesService } from '../../shared/services/budget-codes.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser'
 import { Router } from '@angular/router';
 import { BudgetCode } from 'src/app/shared/models/budget-code.model';
 
@@ -127,6 +129,34 @@ describe('BudgetCodesListComponent', () => {
     // check for execution
     expect(serviceSpy).toHaveBeenCalled();
     
+  })
+
+  it('should populate table rows based on  BudgetCode[]', () => {
+
+    // populates component info for table
+    component.budgetCodes = [
+      new BudgetCode(1, 2020, "0-00001", "Test 1"),
+      new BudgetCode(2, 2020, "0-00002", "Test 2"),
+      new BudgetCode(3, 2020, "0-00003", "Test 3"),
+      new BudgetCode(4, 2020, "0-00004", "Test 4")
+    ];
+    component.pagedBudgetCodes = new MatTableDataSource<BudgetCode>(component.budgetCodes);
+    component.pagedBudgetCodes.paginator = component.paginator;
+
+    //fixture update
+    fixture.detectChanges();
+
+    // query the table
+    let table = fixture.debugElement.queryAll(By.css(".mat-table"));
+
+    // verify it exists
+    expect(table).toBeTruthy();
+
+    // check that table rows exist, since they are child nodes
+    expect(table[0].childNodes[1].nativeNode.nextElementSibling).toBeTruthy();
+
+    
+
   })
     
 });

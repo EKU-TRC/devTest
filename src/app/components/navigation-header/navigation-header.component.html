@@ -2,7 +2,7 @@
     <mat-form-field appearance="standard">
         <mat-label>Filter By Year</mat-label>
         <mat-select (selectionChange)="navigateToList($event.value)">
-            <mat-option *ngFor="let year of years" [value]="year">
+            <mat-option *ngFor="let year of years" [id]="year" [value]="year">
                 {{year}}
             </mat-option>
         </mat-select>
