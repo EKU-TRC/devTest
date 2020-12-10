@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 class="title">List of Budget Codes</h1>
+  <div class="row">
+    <div class="col-xs-12 col-md-10">
+      <div class="search-and-sort">
+        <div class="search">
+          <form [formGroup]="searchForm" class="form-inline">
+            <div class="form-group">
+              <input
+                type="text"
+                placeholder="search"
+                formControlName="searchKey"
+                (keyup)="filterCodes()"
+                class="searchInput">
+              <select
+                formControlName="searchCategory"  class="search-option" (change)="filterCodes()">
+                <option *ngFor="let searchCat of searchCategories" [ngValue]="searchCat">{{searchCat}}</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="sort">
+          <form [formGroup]="sortForm">
+            <select
+                formControlName="sortCategory"  class="search-option"
+                (change)="onSortCodes()">
+                <option *ngFor="let sortCat of sortCategories" [ngValue]="sortCat">{{sortCat}}</option>
+              </select>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped" *ngIf="!fetchError">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fiscal Year</th>
+            <th scope="col">Budget Code</th>
+            <th scope="col">Budget Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let code of codes; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{code.fiscalYear}}</td>
+            <td>{{code.budgetCode}}</td>
+            <td>{{code.budgetTitle}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

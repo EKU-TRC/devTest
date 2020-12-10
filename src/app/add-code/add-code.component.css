@@ -1,0 +1,15 @@
+h1 {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+span {
+  color: red;
+}
+.error-box {
+  margin-top: 2rem;
+  text-align: center;
+}

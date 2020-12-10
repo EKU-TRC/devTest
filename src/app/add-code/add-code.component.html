@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h1>Add Budget Code</h1>
+      <form [formGroup]="addCodeForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fiscalYear">Fiscal Year</label>
+          <input
+            type="number"
+            id="fiscalYear"
+            formControlName="fiscalYear"
+            class="form-control"
+            placeholder="required, 1970 to 2099"
+            >
+            <span
+              *ngIf="addCodeForm.get('fiscalYear').errors?.required && addCodeForm.get('fiscalYear').touched"
+              class="form-text">
+              Fiscal Year is required!
+            </span>
+            <span
+              *ngIf="addCodeForm.get('fiscalYear').errors?.invalidYear">
+              Fiscal year is invalid
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="budgetCode">Budget Code</label>
+          <input
+            type="text"
+            id="budgetCode"
+            formControlName="budgetCode"
+            class="form-control"
+            placeholder="required, 5 to 10 characters">
+            <span
+            *ngIf="addCodeForm.get('budgetCode').errors?.required && addCodeForm.get('budgetCode').touched"
+            class="form-text">
+            Budget Code is required!
+            </span>
+            <span
+              *ngIf="addCodeForm.get('budgetCode').errors?.minlength">
+              The minimum length for Budget Code is 5
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="budgetTitle">Budget Title</label>
+          <input
+            type="text"
+            id="budgetTitle"
+            formControlName="budgetTitle"
+            class="form-control"
+            placeholder="required, 3 to 50 characters">
+            <span
+              *ngIf="addCodeForm.get('budgetTitle').errors?.required &&addCodeForm.get('budgetTitle').touched"
+              class="form-text">
+              Budget Title is required!
+            </span>
+            <span
+              *ngIf="addCodeForm.get('budgetTitle').errors?.minlength">
+              The minimum length for Budget Title is 3
+            </span>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="addCodeForm.invalid">Submit</button>
+      </form>
+      <div class="alert alert-danger error-box" *ngIf="hasAddError">
+        <p>{{errorMsg}}</p>
+        <button class="btn btn-danger" (click)="onClearError()">OK</button>
+      </div>
+      <div class="success alert-success error-box" *ngIf="!hasAddError&&submitted">
+        <p>Record successfully added</p>
+        <button class="btn btn-success" (click)="onClearAlert()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

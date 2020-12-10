@@ -1,0 +1,30 @@
+.title {
+  margin-bottom: 5rem;
+}
+
+table:nth-child(even) {
+  background: darkgray !important;
+}
+
+.search-and-sort {
+  margin-bottom: 4rem;
+}
+.search {
+  float: left;
+  width: 50%;
+}
+input, select {
+  height: 2.5rem;
+}
+
+.sort {
+  float: right;
+  width: 30%;
+}
+
+@media (max-width: 600px) {
+  .search-and-sort {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
