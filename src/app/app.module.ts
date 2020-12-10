@@ -1,16 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
+/**
+ * App Module TS
+ * 
+ * author: Kenneth Carroll
+ * date: 12/9/2020
+ * revision 3
+ */
+
+// angular imports
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModule, MatExpansionModule, MatDividerModule, MatStepperModule, MatRadioModule, MatTreeModule, MatBottomSheet, MatBottomSheetModule, MatProgressBarModule, MatSelectModule, MatTableModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { 
+  MatSortModule, 
+  MatInputModule, 
+  MatDialogModule, 
+  MatTabsModule, 
+  MatExpansionModule, 
+  MatDividerModule, 
+  MatStepperModule, 
+  MatRadioModule, 
+  MatTreeModule, 
+  MatBottomSheetModule, 
+  MatProgressBarModule, 
+  MatSelectModule, 
+  MatTableModule } from '@angular/material';
+
+// local modules
+import { AppRoutingModule } from './app-routing.module';
+
+// local components
+import { AppComponent } from './app.component';
 import { BudgetCodesListComponent } from './components/budget-codes-list/budget-codes-list.component';
 import { BudgetCodeFormComponent } from './components/budget-code-form/budget-code-form.component';
 import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
