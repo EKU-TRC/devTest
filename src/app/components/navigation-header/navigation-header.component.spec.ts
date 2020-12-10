@@ -172,12 +172,12 @@ describe('NavigationHeaderComponent', () => {
     // create the spy
     const routerSpy = spyOn(router, 'navigate');
     const navSpy = spyOn(component, 'navigateToForm').and.callThrough();
-    
-    // query the button
-    let btn = fixture.debugElement.nativeElement.querySelector('button');
 
     // init the component
     component.ngOnInit();
+
+    // query the button
+    let btn = fixture.debugElement.nativeElement.querySelector('button');
 
     // check component nav method has not happened
     expect(navSpy).not.toHaveBeenCalled();
