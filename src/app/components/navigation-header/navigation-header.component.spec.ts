@@ -52,6 +52,7 @@ describe('NavigationHeaderComponent', () => {
   // should be created
   it('should create', () => {
 
+    fixture.detectChanges();
     // check if exists
     expect(component).toBeTruthy();
   });
@@ -95,6 +96,8 @@ describe('NavigationHeaderComponent', () => {
 
   // test populated options
   it("should populate a list of options", () => {
+
+    fixture.detectChanges();
     
     // init component
     component.ngOnInit();
@@ -122,6 +125,8 @@ describe('NavigationHeaderComponent', () => {
 
     // verify that length matches the above array
     expect(yearOption.length).toBe(2);
+
+    yearOption[0].nativeElement.click();
     
   });
 
@@ -147,10 +152,10 @@ describe('NavigationHeaderComponent', () => {
     fixture.detectChanges();
 
     // grab the selector
-    let select = fixture.debugElement.queryAll(By.css('.mat-select'));
+    let select = fixture.debugElement.nativeElement.querySelector('mat-select');
 
     // trigger the selector to open
-    select[0].nativeElement.click();
+    select.click();
 
     // detect fixture changes
     fixture.detectChanges();
@@ -175,6 +180,8 @@ describe('NavigationHeaderComponent', () => {
 
     // init the component
     component.ngOnInit();
+
+    fixture.detectChanges();
 
     // query the button
     let btn = fixture.debugElement.nativeElement.querySelector('button');
