@@ -1,4 +1,3 @@
-
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, catchError, tap } from "rxjs/operators";
@@ -10,30 +9,44 @@ import { URL_ADD_CODE, URL_ALL_CODES } from "./constants";
   providedIn: "root",
 })
 export class CodeService {
-
   private codes: BudgetCode[] = [];
+  error = new Subject(); //<{ string: any }>
+  // operationStatus: OperationStatus = null;
+  // operationMessage: string = null;
 
   constructor(private http: HttpClient) {}
 
   createCode(code: BudgetCode) {
-    this.http.post(URL_ADD_CODE, code).subscribe(
+    return this.http.post(URL_ADD_CODE, code, { observe: "body" }).subscribe(
+      (responseData) => {
+        // console.log("operation message: ", responseData.message);
+        // console.log("operation results:", responseData.results);
+
+        if (responseData["results"] === "Failed") {
+          this.error.next({ "hasError": true, "message": responseData["message"] });
+          // this.operationMessage = responseData.message;
+          // console.log("operation message: ", responseData.message);
+        } else {
+          // this.operationMessage = null;
+          this.fetchCodes();
+        }
+      }
+      // ,
+      // (error) => {}
     );
-    this.fetchCodes();
   }
 
   fetchCodes() {
-    this.http.get(URL_ALL_CODES).subscribe(
-      (responseData) => {
-        const codesData = responseData["data"];
-        console.log(codesData);
-        for (const key in codesData) {
-          if (codesData.hasOwnProperty(key)) {
-            this.codes.push(codesData[key]);
-          }
+    return this.http.get(URL_ALL_CODES).subscribe((responseData) => {
+      const codesData = responseData["data"];
+      console.log(codesData);
+      for (const key in codesData) {
+        if (codesData.hasOwnProperty(key)) {
+          this.codes.push(codesData[key]);
         }
-        this.codes.sort((a, b) => (a.fiscalYear > b.fiscalYear ? -1 : 1));
       }
-    );
+      this.codes.sort((a, b) => (a.fiscalYear > b.fiscalYear ? -1 : 1));
+    });
   }
 
   // fetchCodes() {

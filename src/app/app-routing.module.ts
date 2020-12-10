@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: "", redirectTo: "view-codes", pathMatch: "full" },
   { path: "view-codes", component: CodeListComponent },
   { path: "add-code", component: AddCodeComponent },
+  { path: "**", redirectTo: "view-codes" }
 ];
 
 @NgModule({

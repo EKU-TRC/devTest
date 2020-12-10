@@ -28,10 +28,10 @@
                 type="text"
                 placeholder="search"
                 formControlName="searchKey"
-                (change)="this.filterCodes()"
+                (keyup)="filterCodes()"
                 class="searchInput">
               <select
-                formControlName="searchCategory"  class="form-control" class="search-option">
+                formControlName="searchCategory"  class="form-control" class="search-option" (change)="filterCodes()">
                 <option *ngFor="let searchCat of searchCategories" [ngValue]="searchCat">{{searchCat}}</option>
                 <!-- <option >{{searchCategories[0]}}</option>
                 <option>{{searchCategories[1]}}</option>
@@ -42,7 +42,7 @@
         </div>
         <div class="sort">
           <form [formGroup]="sortForm">
-            
+
             <select
                 formControlName="sortCategory"  class="form-control" class="search-option"
                 (change)="onSortCodes()">

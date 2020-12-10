@@ -63,6 +63,10 @@
 
         <button class="btn btn-primary" type="submit" [disabled]="addCodeForm.invalid">Submit</button>
       </form>
+      <div class="alert alert-danger error-box" *ngIf="hasAddError">
+        <p>{{errorMsg}}</p>
+        <button class="btn btn-danger" (click)="onClearError()">OK</button>
+      </div>
     </div>
   </div>
 </div>

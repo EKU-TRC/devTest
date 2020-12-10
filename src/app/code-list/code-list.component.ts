@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
+// import { Subscription } from "rxjs";
 import { BudgetCode } from "./../budget-code.model";
 import { CodeService } from "./../code.service";
-import { SEARCH_CATEGORIES, SORT_CATEGORIES } from '../constants';
+import { SEARCH_CATEGORIES, SORT_CATEGORIES } from "../constants";
 
 @Component({
   selector: "app-code-list",
@@ -24,11 +24,12 @@ export class CodeListComponent implements OnInit {
       searchKey: new FormControl(null),
       searchCategory: new FormControl(null),
     });
+    this.searchForm.get("searchCategory").setValue(this.searchCategories[0]);
 
     this.sortForm = new FormGroup({
-      sortCategory: new FormControl(null)
+      sortCategory: new FormControl(null),
     });
-
+    this.sortForm.get("sortCategory").setValue(this.sortCategories[0]);
     this.codeService.fetchCodes();
     this.codes = this.codeService.getCodes();
   }
@@ -45,6 +46,10 @@ export class CodeListComponent implements OnInit {
 
     switch (catIndex) {
       case 0: // search by Fiscal Year
+        if (isNaN(key)) {
+          this.codes = [];
+          return;
+        }
         const searchedYear = Number(key);
         if (searchedYear) {
           this.codes = this.codeService
@@ -55,12 +60,18 @@ export class CodeListComponent implements OnInit {
       case 1: // Search by Budget Code
         this.codes = this.codeService
           .getCodes()
-          .filter((code) => code.budgetCode.toLowerCase().indexOf(key.toLowerCase()) !== -1);
+          .filter(
+            (code) =>
+              code.budgetCode.toLowerCase().indexOf(key.toLowerCase()) !== -1
+          );
         break;
       case 2: // Search by Budget Title
         this.codes = this.codeService
           .getCodes()
-          .filter((code) => code.budgetTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1);
+          .filter(
+            (code) =>
+              code.budgetTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1
+          );
         break;
       default:
         this.codes = this.codeService.getCodes();
@@ -73,24 +84,24 @@ export class CodeListComponent implements OnInit {
     const selSortIndex = this.sortCategories.indexOf(selSort);
     switch (selSortIndex) {
       case 0: //sort by Fiscal Year in ascending order
-        this.codes.sort((a, b) => (a.fiscalYear > b.fiscalYear) ? 1 : -1);
+        this.codes.sort((a, b) => (a.fiscalYear > b.fiscalYear ? 1 : -1));
         break;
       case 1: //sort by Fiscal Year in descending order
-        this.codes.sort((a, b) => (a.fiscalYear < b.fiscalYear) ? 1 : -1);
+        this.codes.sort((a, b) => (a.fiscalYear < b.fiscalYear ? 1 : -1));
         break;
       case 2: //sort by Budget Code in ascending order
-        this.codes.sort((a, b) => (a.budgetCode > b.budgetCode) ? 1 : -1);
+        this.codes.sort((a, b) => (a.budgetCode > b.budgetCode ? 1 : -1));
         break;
       case 3: //sort by Budget Code in descending order
-        this.codes.sort((a, b) => (a.budgetCode < b.budgetCode) ? 1 : -1);
+        this.codes.sort((a, b) => (a.budgetCode < b.budgetCode ? 1 : -1));
         break;
 
       case 4: //sort by Budget Title in ascending order
-        this.codes.sort((a, b) => (a.budgetTitle > b.budgetTitle) ? 1 : -1);
+        this.codes.sort((a, b) => (a.budgetTitle > b.budgetTitle ? 1 : -1));
         break;
 
       case 2: //sort by Budget Title in descending order
-        this.codes.sort((a, b) => (a.budgetTitle > b.budgetTitle) ? 1 : -1);
+        this.codes.sort((a, b) => (a.budgetTitle > b.budgetTitle ? 1 : -1));
         break;
       default:
         break;

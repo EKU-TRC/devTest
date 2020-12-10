@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
 import { CodeService } from "./../code.service";
 
 @Component({
@@ -9,10 +10,18 @@ import { CodeService } from "./../code.service";
 })
 export class AddCodeComponent implements OnInit {
   addCodeForm: FormGroup;
+  hasAddError = false;
+  errorMsg = "";
+  errorSub: Subscription;
 
   constructor(private codeService: CodeService) {}
 
   ngOnInit() {
+    this.errorSub = this.codeService.error.subscribe((errorObject) => {
+      console.log(errorObject);
+      this.hasAddError = errorObject["hasError"];
+      this.errorMsg = errorObject["message"];
+    });
     this.addCodeForm = new FormGroup({
       fiscalYear: new FormControl(null, [
         Validators.required,
@@ -33,7 +42,25 @@ export class AddCodeComponent implements OnInit {
 
   onSubmit() {
     this.codeService.createCode(this.addCodeForm.value);
-    this.addCodeForm.reset();
+    console.log("Error message when onSubmit", this.errorMsg);
+    if (!this.hasAddError) {
+      console.log("Has no add error");
+      this.addCodeForm.reset();
+    }
+    // console.log(this.codeService.operationMessage);
+    // if (this.codeService.operationStatus === "Success") {
+    //   this.hasAddError = false;
+    //   this.errorMsg = "";
+    //   this.addCodeForm.reset();
+    // } else {
+    //   this.hasAddError = true;
+    //   this.errorMsg = this.codeService.operationMessage;
+    // }
+  }
+
+  onClearError() {
+    this.hasAddError = false;
+    this.errorMsg = "";
   }
 
   validateYear(control: FormControl): { [s: string]: boolean } {
@@ -51,5 +78,9 @@ export class AddCodeComponent implements OnInit {
     }
     console.log("fiscal year is within range");
     return null;
+  }
+
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
   }
 }
