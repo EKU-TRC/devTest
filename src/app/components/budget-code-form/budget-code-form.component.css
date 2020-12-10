@@ -1,3 +1,11 @@
+/*
+ * Budget Code Form Styling
+ *
+ * Author: Kenneth Carroll
+ * date: 12/9/2020
+ * revision: 2
+*/
+
 .form {
     display: flex;
     flex-direction: column;
