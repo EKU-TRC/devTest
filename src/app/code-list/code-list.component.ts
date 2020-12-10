@@ -99,7 +99,7 @@ export class CodeListComponent implements OnInit {
         this.codes.sort((a, b) => (a.budgetTitle > b.budgetTitle ? 1 : -1));
         break;
 
-      case 2: //sort by Budget Title in descending order
+      case 5: //sort by Budget Title in descending order
         this.codes.sort((a, b) => (a.budgetTitle < b.budgetTitle ? 1 : -1));
         break;
       default:
