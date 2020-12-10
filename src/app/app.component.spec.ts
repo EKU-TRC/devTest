@@ -11,6 +11,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { BudgetCodeFormComponent } from './components/budget-code-form/budget-code-form.component';
@@ -21,7 +22,10 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, 
+        RouterTestingModule.withRoutes([
+          {path:'list/', component: BudgetCodesListComponent},
+          {path: 'form/', component: BudgetCodeFormComponent}
+        ]), 
         FormsModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
@@ -51,4 +55,25 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('devTest');
   });
+
+  it('should have a navigation component', () => {
+
+    // create the fixture
+    const fixture = TestBed.createComponent(AppComponent);
+
+    // register changes
+    fixture.detectChanges();
+
+    // grab the compinent
+    const component = fixture.debugElement.nativeElement;
+
+    // verify its existance
+    expect(component).not.toBeNull();
+
+    // grab the nav component
+    let nav = component.querySelector('app-navigation-header');
+
+    //verify its existence
+    expect(nav).not.toBeNull();
+  })
 });
