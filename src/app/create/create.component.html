@@ -6,12 +6,6 @@
     >
     <!-- add validations -->
 
-    <label for="BudgetCodeId">Budget Code Id:</label>
-    <input type="number" class="form-control" id="BudgetCodeId" 
-    required ngModel name="BudgetCodeId" #BudgetCodeId
-    >
-    <!-- add validations -->
-
     <label for="BudgetCode">Budget Code: </label>
     <input type="text" class="form-control" id="BudgetCode" 
     required ngModel name="BudgetCode" #BudgetCode
@@ -29,4 +23,4 @@
 </form>
 <br>
 <div *ngIf="results">Created Successfully</div>
-<div *ngIf="!results">Something went wrong, try again.</div>
+<div *ngIf="results===false">Something went wrong, try again.</div>
