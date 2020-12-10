@@ -1,15 +1,41 @@
-/*import { TestBed, async } from '@angular/core/testing';
+/**
+ *  App Module Test Cases
+ * 
+ *  Author: Kenneth Carroll
+ *  date: 12/9/20
+ *  revision: 1
+ */
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed, async } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatOptionModule, MatPaginatorModule, MatSelectModule, MatTableModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { BudgetCodeFormComponent } from './components/budget-code-form/budget-code-form.component';
+import { BudgetCodesListComponent } from './components/budget-codes-list/budget-codes-list.component';
+import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule, 
+        FormsModule,
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatPaginatorModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavigationHeaderComponent, 
+        BudgetCodesListComponent,
+        BudgetCodeFormComponent
       ],
     }).compileComponents();
   }));
@@ -25,12 +51,4 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('devTest');
   });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to devTest!');
-  });
 });
-*/
