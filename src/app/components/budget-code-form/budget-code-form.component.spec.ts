@@ -3,18 +3,21 @@
  * 
  * Author: Kenneth Carroll
  * date: 12/9/10
- * revision: 1
+ * revision: 2
  */
+
+// angular imports
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BudgetCodesService } from 'src/app/shared/services/budget-codes.service';
 
+// local imports
+import { BudgetCodesService } from 'src/app/shared/services/budget-codes.service';
 import { BudgetCodeFormComponent } from './budget-code-form.component';
+import { MaterialModule } from '../../shared/modules/material/material.module';
 
 describe('BudgetCodeFormComponent', () => {
   let component: BudgetCodeFormComponent;
@@ -26,10 +29,7 @@ describe('BudgetCodeFormComponent', () => {
       declarations: [ BudgetCodeFormComponent ],
       imports: [
         BrowserAnimationsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
+        MaterialModule,
         HttpClientModule, 
         RouterTestingModule,
         FormsModule

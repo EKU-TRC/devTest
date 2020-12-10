@@ -3,19 +3,21 @@
  * 
  *  author: Kenneth Carroll
  *  date: 12/9/10
- *  revision: 1
+ *  revision: 2
  */
 
+// angular imports
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing';
 
+// local imports
 import { BudgetCodesService } from 'src/app/shared/services/budget-codes.service';
 import { NavigationHeaderComponent } from './navigation-header.component';
+import { MaterialModule } from 'src/app/shared/modules/material/material.module';
 
 describe('NavigationHeaderComponent', () => {
   let component: NavigationHeaderComponent;
@@ -28,13 +30,9 @@ describe('NavigationHeaderComponent', () => {
       declarations: [ NavigationHeaderComponent ], 
       imports: [
         BrowserAnimationsModule,
-        MatInputModule,
-        MatOptionModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatSelectModule, 
         HttpClientTestingModule, 
-        RouterTestingModule
+        RouterTestingModule,
+        MaterialModule
       ],
       providers: [
         BudgetCodesService
@@ -108,10 +106,10 @@ describe('NavigationHeaderComponent', () => {
     fixture.detectChanges();
 
     // grab the selector
-    let select = fixture.debugElement.queryAll(By.css('.mat-select'));
+    let select = fixture.debugElement.nativeElement.querySelector('.mat-select');
 
     // trigger the selector to open
-    select[0].nativeElement.click();
+    select.click();
 
     // detect fixture changes
     fixture.detectChanges();

@@ -3,30 +3,24 @@
  * 
  * Author: Kenneth Carroll
  * Date: 12/9/2020
- * Revision: 1
+ * Revision: 2
  * 
  */
 
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-
-import {
-  MatFormFieldModule, 
-  MatInputModule, 
-  MatPaginatorModule, 
-  MatSelectModule, 
-  MatTableDataSource, 
-  MatTableModule
-} from '@angular/material'
+// angular imports
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableDataSource } from '@angular/material'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule} from '@angular/router/testing';
-
-import { BudgetCodesListComponent } from './budget-codes-list.component';
-
-import { BudgetCodesService } from '../../shared/services/budget-codes.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser'
 import { Router } from '@angular/router';
+
+// local imports
 import { BudgetCode } from 'src/app/shared/models/budget-code.model';
+import { MaterialModule } from 'src/app/shared/modules/material/material.module';
+import { BudgetCodesListComponent } from './budget-codes-list.component';
+import { BudgetCodesService } from '../../shared/services/budget-codes.service';
 
 describe('BudgetCodesListComponent', () => {
   let component: BudgetCodesListComponent;
@@ -41,11 +35,7 @@ describe('BudgetCodesListComponent', () => {
       ],
       imports: [
         BrowserAnimationsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatInputModule,
+        MaterialModule,
         HttpClientTestingModule,
         RouterTestingModule
       ], 
@@ -60,6 +50,7 @@ describe('BudgetCodesListComponent', () => {
     
     fixture = TestBed.createComponent(BudgetCodesListComponent);
     component = fixture.componentInstance;
+    component.loading = false;
     router = fixture.debugElement.injector.get(Router);
     service = fixture.debugElement.injector.get(BudgetCodesService);
     fixture.detectChanges();
@@ -75,6 +66,20 @@ describe('BudgetCodesListComponent', () => {
 
     // query table out of fixture
     let table = fixture.debugElement.nativeElement.querySelector('table');
+
+    // should be null 
+    expect(table).toBeNull();
+
+    // hide the spinner
+    component.loading=false;
+
+    // update fixture
+    fixture.detectChanges();
+
+    // requery
+    table = fixture.debugElement.nativeElement.querySelector('table');
+
+    //exists
     expect(table).toBeTruthy();
   })
 
@@ -82,6 +87,18 @@ describe('BudgetCodesListComponent', () => {
     
     // query paginator out of fixture
     let paginator = fixture.debugElement.nativeElement.querySelector('mat-paginator');
+    expect(paginator).toBeNull();
+
+    // hide the spinner
+    component.loading=false;
+
+    // update fixture
+    fixture.detectChanges();
+
+    // requery
+    paginator = fixture.debugElement.nativeElement.querySelector('mat-paginator');
+
+    // check if exists
     expect(paginator).toBeTruthy();
   })
 
@@ -149,11 +166,52 @@ describe('BudgetCodesListComponent', () => {
     // query the table
     let table = fixture.debugElement.queryAll(By.css(".mat-table"));
 
+    // verify that the array returns no results
+    expect(table.length).toBe(0);
+
+    // hide the spinner
+    component.loading=false;
+
+    // update fixture
+    fixture.detectChanges();
+
+    // requery
+    table = fixture.debugElement.queryAll(By.css(".mat-table"));
+
     // verify it exists
-    expect(table).toBeTruthy();
+    expect(table.length).not.toBe(0);
 
     // check that table rows exist, since they are child nodes
     expect(table[0].childNodes[1].nativeNode.nextElementSibling).toBeTruthy();
+
+  })
+
+  // validate spinner conditional rendering
+  it("should render mat-spinner conditionally", () => {
+
+    // initialize loading true
+    component.loading = true;
+
+    // update fixture
+    fixture.detectChanges();
+
+    // query spinner
+    let spinner = fixture.debugElement.nativeElement.querySelector('mat-spinner');
+
+    // verify render
+    expect(spinner).toBeTruthy();
+
+    // set loading false
+    component.loading = false;
+
+    // update
+    fixture.detectChanges();
+
+    // requery
+    spinner = fixture.debugElement.nativeElement.querySelector('mat-spinner');
+
+    // expect no rendering
+    expect(spinner).toBeNull();
 
     
 
