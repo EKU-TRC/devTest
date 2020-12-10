@@ -1,21 +1,3 @@
-<!-- <div class="container">
-<div class="row">
-  <div class="col-xs-12 col-md-10">
-  <h1>List of Budget Codes</h1>
-    <div class="table">
-      <div class="table-row">
-        <div class="table-cell year">Fiscal Year</div>
-          <div class="table-cell code">Budget Code</div>
-          <div class="table-cell title">Budget Title</div>
-      </div>
-    </div>
-    <app-code-item *ngFor="let code of codes" [code]= "code"></app-code-item>
-  </div>
-</div>
-</div> -->
-
-
-
 <div class="container">
   <h1 class="title">List of Budget Codes</h1>
   <div class="row">
@@ -31,11 +13,8 @@
                 (keyup)="filterCodes()"
                 class="searchInput">
               <select
-                formControlName="searchCategory"  class="form-control" class="search-option" (change)="filterCodes()">
+                formControlName="searchCategory"  class="search-option" (change)="filterCodes()">
                 <option *ngFor="let searchCat of searchCategories" [ngValue]="searchCat">{{searchCat}}</option>
-                <!-- <option >{{searchCategories[0]}}</option>
-                <option>{{searchCategories[1]}}</option>
-                <option>{{searchCategories[2]}}</option> -->
               </select>
             </div>
           </form>
@@ -44,15 +23,9 @@
           <form [formGroup]="sortForm">
 
             <select
-                formControlName="sortCategory"  class="form-control" class="search-option"
+                formControlName="sortCategory"  class="search-option"
                 (change)="onSortCodes()">
                 <option *ngFor="let sortCat of sortCategories" [ngValue]="sortCat">{{sortCat}}</option>
-                <!-- <option >{{sortCategories[0]}}</option>
-                <option>{{sortCategories[1]}}</option>
-                <option>{{sortCategories[2]}}</option>
-                <option >{{sortCategories[3]}}</option>
-                <option>{{sortCategories[4]}}</option>
-                <option>{{sortCategories[5]}}</option> -->
               </select>
           </form>
         </div>
@@ -60,21 +33,21 @@
       <table class="table table-striped" *ngIf="!fetchError">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Fiscal Year</th>
             <th scope="col">Budget Code</th>
             <th scope="col">Budget Title</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let code of codes">
+          <tr *ngFor="let code of codes; let i = index">
+            <th>{{i+1}}</th>
             <td>{{code.fiscalYear}}</td>
             <td>{{code.budgetCode}}</td>
             <td>{{code.budgetTitle}}</td>
           </tr>
         </tbody>
       </table>
-
-      <div *ngIf="fetchError">An error occurred</div>
     </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-// import { Subscription } from "rxjs";
 import { BudgetCode } from "./../budget-code.model";
 import { CodeService } from "./../code.service";
 import { SEARCH_CATEGORIES, SORT_CATEGORIES } from "../constants";
@@ -29,7 +28,8 @@ export class CodeListComponent implements OnInit {
     this.sortForm = new FormGroup({
       sortCategory: new FormControl(null),
     });
-    this.sortForm.get("sortCategory").setValue(this.sortCategories[0]);
+    this.sortForm.get("sortCategory").setValue(this.sortCategories[1]);
+    // this.codes = []; //reset
     this.codeService.fetchCodes();
     this.codes = this.codeService.getCodes();
   }

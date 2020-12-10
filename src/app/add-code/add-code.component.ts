@@ -8,9 +8,10 @@ import { CodeService } from "./../code.service";
   templateUrl: "./add-code.component.html",
   styleUrls: ["./add-code.component.css"],
 })
-export class AddCodeComponent implements OnInit {
+export class AddCodeComponent implements OnInit, OnDestroy {
   addCodeForm: FormGroup;
   hasAddError = false;
+  submitted = false;
   errorMsg = "";
   errorSub: Subscription;
 
@@ -18,9 +19,13 @@ export class AddCodeComponent implements OnInit {
 
   ngOnInit() {
     this.errorSub = this.codeService.error.subscribe((errorObject) => {
-      console.log(errorObject);
       this.hasAddError = errorObject["hasError"];
       this.errorMsg = errorObject["message"];
+      console.log("this.hasAddError: ", this.hasAddError);
+      if (!this.hasAddError) {
+      console.log("Has no add error");
+      this.addCodeForm.reset();
+    }
     });
     this.addCodeForm = new FormGroup({
       fiscalYear: new FormControl(null, [
@@ -42,20 +47,12 @@ export class AddCodeComponent implements OnInit {
 
   onSubmit() {
     this.codeService.createCode(this.addCodeForm.value);
+    this.submitted = true;
     console.log("Error message when onSubmit", this.errorMsg);
     if (!this.hasAddError) {
       console.log("Has no add error");
       this.addCodeForm.reset();
     }
-    // console.log(this.codeService.operationMessage);
-    // if (this.codeService.operationStatus === "Success") {
-    //   this.hasAddError = false;
-    //   this.errorMsg = "";
-    //   this.addCodeForm.reset();
-    // } else {
-    //   this.hasAddError = true;
-    //   this.errorMsg = this.codeService.operationMessage;
-    // }
   }
 
   onClearError() {
@@ -63,6 +60,10 @@ export class AddCodeComponent implements OnInit {
     this.errorMsg = "";
   }
 
+  onClearAlert() {
+    this.submitted = false;
+  }
+  
   validateYear(control: FormControl): { [s: string]: boolean } {
     if (!control.value) {
       return null;
@@ -71,12 +72,9 @@ export class AddCodeComponent implements OnInit {
     if (!Number.isInteger(convertedYear)) {
       return { invalidYear: true };
     }
-    console.log("converted year is ", convertedYear);
     if (convertedYear < 1970 || convertedYear > 2099) {
-      console.log("fiscal year is outside of range");
       return { invalidYear: true };
     }
-    console.log("fiscal year is within range");
     return null;
   }
 

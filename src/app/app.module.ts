@@ -31,7 +31,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { HeaderComponent } from "./header/header.component";
 import { AddCodeComponent } from "./add-code/add-code.component";
 import { CodeListComponent } from "./code-list/code-list.component";
-import { CodeItemComponent } from "./code-list/code-item/code-item.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "view-codes", pathMatch: "full" },
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
     HeaderComponent,
     AddCodeComponent,
     CodeListComponent,
-    CodeItemComponent,
   ],
   imports: [
     BrowserModule,

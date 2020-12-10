@@ -23,13 +23,14 @@ export class CodeService {
         // console.log("operation results:", responseData.results);
 
         if (responseData["results"] === "Failed") {
-          this.error.next({ "hasError": true, "message": responseData["message"] });
+          this.error.next({ hasError: true, message: responseData["message"] });
           // this.operationMessage = responseData.message;
           // console.log("operation message: ", responseData.message);
-        } else {
-          // this.operationMessage = null;
-          this.fetchCodes();
         }
+        // else {
+
+        //   this.fetchCodes();
+        // }
       }
       // ,
       // (error) => {}
@@ -37,9 +38,11 @@ export class CodeService {
   }
 
   fetchCodes() {
+    this.codes = [];
     return this.http.get(URL_ALL_CODES).subscribe((responseData) => {
       const codesData = responseData["data"];
       console.log(codesData);
+
       for (const key in codesData) {
         if (codesData.hasOwnProperty(key)) {
           this.codes.push(codesData[key]);
@@ -48,13 +51,6 @@ export class CodeService {
       this.codes.sort((a, b) => (a.fiscalYear > b.fiscalYear ? -1 : 1));
     });
   }
-
-  // fetchCodes() {
-  //   this.http.get<BudgetCode[]>(URL_ALL_CODES).subscribe( responseData => {
-  //     // this.codes = [...responseData.data];
-  //     this.codes = responseData;
-  //   });
-  // }
 
   getCodes() {
     return this.codes;

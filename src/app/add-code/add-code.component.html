@@ -67,6 +67,10 @@
         <p>{{errorMsg}}</p>
         <button class="btn btn-danger" (click)="onClearError()">OK</button>
       </div>
+      <div class="success alert-success error-box" *ngIf="!hasAddError&&submitted">
+        <p>Record successfully added</p>
+        <button class="btn btn-success" (click)="onClearAlert()">OK</button>
+      </div>
     </div>
   </div>
 </div>
