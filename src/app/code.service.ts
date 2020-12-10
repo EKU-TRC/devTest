@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { map, catchError, tap } from "rxjs/operators";
-import { Subject, throwError } from "rxjs";
+import { Subject} from "rxjs";
 import { BudgetCode } from "./budget-code.model";
 import { URL_ADD_CODE, URL_ALL_CODES } from "./constants";
 
@@ -10,30 +9,17 @@ import { URL_ADD_CODE, URL_ALL_CODES } from "./constants";
 })
 export class CodeService {
   private codes: BudgetCode[] = [];
-  error = new Subject(); //<{ string: any }>
-  // operationStatus: OperationStatus = null;
-  // operationMessage: string = null;
+  error = new Subject();
 
   constructor(private http: HttpClient) {}
 
   createCode(code: BudgetCode) {
     return this.http.post(URL_ADD_CODE, code, { observe: "body" }).subscribe(
       (responseData) => {
-        // console.log("operation message: ", responseData.message);
-        // console.log("operation results:", responseData.results);
-
         if (responseData["results"] === "Failed") {
           this.error.next({ hasError: true, message: responseData["message"] });
-          // this.operationMessage = responseData.message;
-          // console.log("operation message: ", responseData.message);
         }
-        // else {
-
-        //   this.fetchCodes();
-        // }
       }
-      // ,
-      // (error) => {}
     );
   }
 

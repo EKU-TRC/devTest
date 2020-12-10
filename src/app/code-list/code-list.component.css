@@ -16,12 +16,7 @@ table:nth-child(even) {
 input, select {
   height: 2.5rem;
 }
-/* .searchInput {
-  width: 60%;
-}
-.searchOption {
-  width: 30%;
-} */
+
 .sort {
   float: right;
   width: 30%;

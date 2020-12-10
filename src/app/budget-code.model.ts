@@ -1,5 +1,4 @@
 export class BudgetCode {
-  // budgetCodeId: number;
   fiscalYear: number;
   budgetCode: string;
   budgetTitle: string;

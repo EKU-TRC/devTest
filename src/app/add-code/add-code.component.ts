@@ -48,9 +48,7 @@ export class AddCodeComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.codeService.createCode(this.addCodeForm.value);
     this.submitted = true;
-    console.log("Error message when onSubmit", this.errorMsg);
     if (!this.hasAddError) {
-      console.log("Has no add error");
       this.addCodeForm.reset();
     }
   }
@@ -63,7 +61,7 @@ export class AddCodeComponent implements OnInit, OnDestroy {
   onClearAlert() {
     this.submitted = false;
   }
-  
+
   validateYear(control: FormControl): { [s: string]: boolean } {
     if (!control.value) {
       return null;
