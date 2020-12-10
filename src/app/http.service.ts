@@ -9,10 +9,10 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   getBudgets() {
-    return this.http.get('https://uat.trc.eku.edu/budgetcodeexam/api/all')
+    return this.http.get('https://uat.trc.eku.edu/budgetcodeexam/api/all');
   }
 
   addBudget(createBudget) {
-    return this.http.post('https://uat.trc.eku.edu/budgetcodeexam/api/add', createBudget)
+    return this.http.post('https://uat.trc.eku.edu/budgetcodeexam/api/add', createBudget);
   }
 }

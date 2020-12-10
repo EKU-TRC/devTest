@@ -7,7 +7,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  results = null
+  results = null;
   constructor(public http: HttpService) { }
 
   onSubmit(form) {
@@ -16,9 +16,10 @@ export class CreateComponent {
       FiscalYear: form.value.FiscalYear,
       BudgetCode: form.value.BudgetCode,
       BudgetTitle: form.value.BudgetTitle
-    }
+    };
     this.http.addBudget(newBudgetData).subscribe(data => {
-      data['results'] === "Success" ? this.results = true : this.results = false;
-    })
+      const key = 'results';
+      data[key] === 'Success' ? this.results = true : this.results = false;
+    });
   }
 }
