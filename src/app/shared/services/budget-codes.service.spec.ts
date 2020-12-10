@@ -10,7 +10,7 @@
 // angular imports
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 // local imports
 import { BudgetCodesService } from './budget-codes.service';
