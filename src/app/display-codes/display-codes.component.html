@@ -1,10 +1,8 @@
 <mat-toolbar>
-    <span>Michael Manspergers Exam</span>
-    <button mat-button routerLink = '/'>Display Codes Component </button>
-    <button mat-button routerLink = '/'>Add Code Component </button>
+    <span>Michael Mansperger's devTest</span>
+    <button mat-button routerLink="/display-codes">Display Codes</button>
+    <button mat-button routerLink="/add-code">Add Code</button>
 </mat-toolbar>
-
-
 <mat-card>
     <mat-card-header>
         <mat-card-title>Fetch a single Budget id</mat-card-title>
@@ -35,7 +33,7 @@
         <mat-card-title>Fetch Specific Year</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-list *ngFor="let code of specificYear">
+        <mat-list *ngFor="let code of specificYear.slice(0,3)">
             <mat-list-item>Id: {{code.budgetCodeId}}</mat-list-item>
             <mat-list-item>Code: {{code.budgetCode}}</mat-list-item>
             <mat-list-item>Title: {{code.budgetTitle}}</mat-list-item>
