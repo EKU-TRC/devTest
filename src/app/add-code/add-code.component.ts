@@ -10,10 +10,10 @@ import { BudgetCodesService } from '../budget-codes.service';
 export class AddCodeComponent implements OnInit {
 
   budgetCode = {
-    budgetCodeId: '',
-    budgetCode: '',
-    budgetTitle: '',
-    fiscalYear: ''
+    budgetCodeId: null,
+    budgetCode: null,
+    budgetTitle: null,
+    fiscalYear: null
   };
 
   constructor(
@@ -25,12 +25,12 @@ export class AddCodeComponent implements OnInit {
   }
 
   addCode(response): void {
-    console.log(response);
+    // console.log(response);
     this.budgetCode.budgetCodeId = response.form.controls.budgetCodeId.value;
     this.budgetCode.budgetCode = response.form.controls.budgetCode.value;
     this.budgetCode.budgetTitle = response.form.controls.budgetTitle.value;
     this.budgetCode.fiscalYear = response.form.controls.fiscalYear.value;
-    console.log(this.budgetCode);
-    // this.budgetService.addCode(this.data);
+    // console.log(this.budgetCode);
+    this.budgetService.addCode(this.budgetCode);
   }
 }

@@ -22,8 +22,8 @@ export class BudgetCodesService {
   public specificCode(): any {
     return this.httpclient.get(this.API_URL + 'code/8-00001');
   }
-
-  public addCode(budgetCodeObject) {
-    return this.httpclient.post(this.API_URL + 'add', budgetCodeObject);
+  public addCode(budgetCode) {
+    console.log(budgetCode);
+    return this.httpclient.post(this.API_URL + 'add', budgetCode);
   }
 }
