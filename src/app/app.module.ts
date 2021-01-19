@@ -7,7 +7,7 @@ import { MatButtonModule, } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModule, MatExpansionModule, MatDividerModule, MatStepperModule, MatRadioModule, MatTreeModule, MatBottomSheet, MatBottomSheetModule, MatProgressBarModule, MatSelectModule, MatTableModule,MatToolbarModule, MatListModule } from '@angular/material';
+import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModule, MatExpansionModule, MatDividerModule, MatStepperModule, MatRadioModule, MatTreeModule, MatBottomSheet, MatBottomSheetModule, MatProgressBarModule, MatSelectModule, MatTableModule,MatToolbarModule, MatListModule, MatCardModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DisplayCodesComponent } from './display-codes/display-codes.component';
 import { AddCodeComponent } from './add-code/add-code.component';
@@ -45,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatBottomSheetModule,
     MatToolbarModule,
     MatListModule,
+    MatCardModule,
     HttpClientModule
 
   ],

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,16 @@ export class BudgetCodesService {
 
   constructor(private httpclient: HttpClient) { }
 
-  public testing(): any {
+  public singleCode(): any {
     return this.httpclient.get(this.API_URL + 'id/1');
+  }
+  public allCodes(): any {
+    return this.httpclient.get(this.API_URL + 'all');
+  }
+  public specificYear(): any {
+    return this.httpclient.get(this.API_URL + 'year/2018');
+  }
+  public specificCode(): any {
+    return this.httpclient.get(this.API_URL + 'code/8-00001');
   }
 }
