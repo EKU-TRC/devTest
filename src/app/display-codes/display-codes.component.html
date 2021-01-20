@@ -1,0 +1,56 @@
+<mat-toolbar>
+    <span>Michael Mansperger's devTest</span>
+    <button mat-button routerLink="/display-codes">Display Codes</button>
+    <button mat-button routerLink="/add-code">Add Code</button>
+</mat-toolbar>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Fetch a single Budget id</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>Id: {{singleCode.budgetCodeId}}</p>
+        <p>Code: {{singleCode.budgetCode}}</p>
+        <p>Title: {{singleCode.budgetTitle}}</p>
+        <p>Year: {{singleCode.fiscalYear}}</p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Fetch All Codes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngFor="let code of allCodes.slice(0,3)">
+            <mat-list-item>Id: {{code.budgetCodeId}}</mat-list-item>
+            <mat-list-item>Code: {{code.budgetCode}}</mat-list-item>
+            <mat-list-item>Title: {{code.budgetTitle}}</mat-list-item>
+            <mat-list-item>Year: {{code.fiscalYear}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Fetch Specific Year</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngFor="let code of specificYear.slice(0,3)">
+            <mat-list-item>Id: {{code.budgetCodeId}}</mat-list-item>
+            <mat-list-item>Code: {{code.budgetCode}}</mat-list-item>
+            <mat-list-item>Title: {{code.budgetTitle}}</mat-list-item>
+            <mat-list-item>Year: {{code.fiscalYear}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Fetch specific Codes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngFor="let code of specificCode">
+            <mat-list-item>Id: {{code.budgetCodeId}}</mat-list-item>
+            <mat-list-item>Code: {{code.budgetCode}}</mat-list-item>
+            <mat-list-item>Title: {{code.budgetTitle}}</mat-list-item>
+            <mat-list-item>Year: {{code.fiscalYear}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

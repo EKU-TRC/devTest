@@ -1,0 +1,36 @@
+<mat-toolbar>
+    <span>Michael Mansperger's devTest</span>
+    <button mat-button routerLink="/display-codes">Display Codes</button>
+    <button mat-button routerLink="/add-code">Add Code</button>
+</mat-toolbar>
+<mat-toolbar>
+    <span>Create a Budget Code</span>
+</mat-toolbar>
+<br>
+<form #budgetCode = "ngForm" (ngSubmit)="addCode(budgetCode)">
+    <label for="budgetCodeId">budgetCodeId</label>
+    <br>
+    <input type="number" ngModel name="budgetCodeId" placeholder="ID#"> 
+    <br>
+    <label for="budgetCode">budgetCode</label>
+    <br>
+    <input type="text" ngModel name="budgetCode" placeholder="Code">
+    <br>
+    <label for="budgetTitle">budgetTitle</label>
+    <br>
+    <input type="text" ngModel name="budgetTitle" placeholder="Title">
+    <br>
+    <label for="fiscalYear">fiscalYear</label>
+    <br>
+    <input type="number" ngModel name="fiscalYear" placeholder="Year">
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<!-- <p>Id: {{singleCode.budgetCodeId}}</p>
+        <p>Code: {{singleCode.budgetCode}}</p>
+        <p>Title: {{singleCode.budgetTitle}}</p>
+        <p>Year: {{singleCode.fiscalYear}}</p> -->
+
+
+    
