@@ -1,0 +1,17 @@
+<h1 class="mt-5 mb-5">Current Budget Codes:</h1>
+  <table class="table mb-5">
+    <thead>
+      <tr>
+        <th scope="col">Budget Code</th>
+        <th scope="col">Budget Title</th>
+        <th scope="col">Fiscal Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of data">
+        <th scope="row">{{ data.budgetCode }}</th>
+        <td>{{ data.budgetTitle }}</td>
+        <td>{{ data.fiscalYear}}</td>
+      </tr>
+    </tbody>
+  </table>

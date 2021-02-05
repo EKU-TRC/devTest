@@ -9,10 +9,16 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSortModule, MatInputModule, MatDialog, MatDialogModule, MatTabsModule, MatExpansionModule, MatDividerModule, MatStepperModule, MatRadioModule, MatTreeModule, MatBottomSheet, MatBottomSheetModule, MatProgressBarModule, MatSelectModule, MatTableModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { BudgetcodesComponent } from './budgetcodes/budgetcodes.component';
+import { AddcodesComponent } from './addcodes/addcodes.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BudgetcodesComponent,
+    AddcodesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,9 @@ import { FormsModule } from '@angular/forms';
     MatRadioModule,
     MatInputModule,
     MatTableModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    HttpClientModule
+
 
   ],
   providers: [],

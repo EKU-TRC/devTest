@@ -1,0 +1,18 @@
+
+<h2 class="mt-5">Add New Code:</h2>
+<form #myform = 'ngForm' class="mt-5 mb-5" (ngSubmit)="onSubmit(myform); myform.reset()">
+<div class="mb-3">
+    <label for="budgetTitle" class="form-label">Budget Title:</label>
+    <input type="text" class="form-control" name="budgetTitle" placeholder="Enter budget title here" ngModel>
+</div>
+<div class="mb-3">
+    <label for="fiscalYear" class="form-label">Fiscal Year:</label>
+    <input type="text" class="form-control" name="fiscalYear" placeholder="Enter fiscal year" ngModel>
+</div>
+<div class="mb-3">
+    <label for="budgetCode" class="form-label">Budget Code:</label>
+    <input type="text" class="form-control" name="budgetCode" placeholder="Enter budget code here" ngModel>
+</div>
+<button type="submit" class="btn btn-primary" >Submit</button>
+</form>
+
