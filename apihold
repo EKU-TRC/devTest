@@ -1,0 +1,10 @@
+
+
+$http({method: 'GET', url: 'your url as a string'}).
+    then(function(response) {
+       // here your response goes. Use it.
+       // in your case - your data will be in response.data
+       console.log(response.data);
+    }, function(response) {
+       // here is the error if requset failed.
+  });
