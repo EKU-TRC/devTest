@@ -1,0 +1,30 @@
+<!--
+    Navigation HTML Template
+
+    Author: Kenneth Carroll
+    date: 12/9/2020
+    revision: 2
+-->
+
+<!-- Navigation containing Div-->
+<div class="navigation">
+
+    <!-- Mat Form Field-->
+    <mat-form-field appearance="standard">
+
+        <!-- Label for the filter-->
+        <mat-label>Filter By Year</mat-label>
+
+        <!-- selector with selection change to filter by year-->
+        <mat-select (selectionChange)="navigateToList($event.value)">
+
+            <!-- Option Menu that renders if select is clicked, renders over year array in component-->
+            <mat-option *ngFor="let year of years" [id]="year" [value]="year">
+                {{year}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Button opposite selector to take user to the form-->
+    <button mat-raised-button color="primary" (click)="navigateToForm()">New</button>
+</div>

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  budgetCodeApi: 'https://uat.trc.eku.edu/budgetcodeexam/api/'
 };

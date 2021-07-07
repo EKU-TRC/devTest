@@ -1,0 +1,55 @@
+<!--
+    Budget Codes List Component HTML
+
+    author: Kenneth Carroll
+    date: 12/9/2020
+    revision: 4
+
+-->
+
+<!-- Render if not loading-->
+<div *ngIf="!loading; else showLoading">
+
+    <!-- Angular Material Table -->
+    <table mat-table [dataSource]="pagedBudgetCodes">
+
+        <!-- Budget Code Column-->
+        <ng-container matColumnDef="bCode">
+            <th mat-header-cell *matHeaderCellDef>Budget Code</th>
+            <td mat-cell *matCellDef="let code">{{code.budgetCode}}</td>
+        </ng-container>
+
+        <!-- Budget Title Column-->
+        <ng-container matColumnDef="bTitle">
+            <th mat-header-cell *matHeaderCellDef>Budget Title</th>
+            <td mat-cell *matCellDef="let code">{{code.budgetTitle}}</td>
+        </ng-container>
+
+        <!-- Fiscal Year Column-->
+        <ng-container matColumnDef="fYear">
+            <th mat-header-cell *matHeaderCellDef>Fiscal Year</th>
+            <td mat-cell *matCellDef="let code">{{code.fiscalYear}}</td>
+        </ng-container>
+
+        <!-- Row Rendering-->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" [id]="row.budgetCode"></tr>
+    
+    </table>
+
+</div>
+
+<!-- Render if loading-->
+<ng-template #showLoading>
+
+    <!-- Div for providing styling-->
+    <div class="spinner">
+
+        <!-- Spinner from Angular Materials-->
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
+
+
+<!-- Angular Material Paginator-->
+<mat-paginator class="paginators"[pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>

@@ -1,0 +1,31 @@
+/*
+ * Budget Code Form Styling
+ *
+ * Author: Kenneth Carroll
+ * date: 12/9/2020
+ * revision: 3
+*/
+
+/* Form Styling*/
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+}
+/* Button Styling*/
+.mat-stroked-button {
+    max-width: 3rem;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/*Styling for spinner*/
+.spinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
